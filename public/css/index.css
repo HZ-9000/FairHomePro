@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  background-color: White;
+  font-family: "Major Mono Display";
+}
+
+.title {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 30%;
+}
+
+.title h1 {
+  width: 100%;
+  top: 30%;
+  font-size: 4.4em;
+  color: Black;
+}
