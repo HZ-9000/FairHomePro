@@ -1,7 +1,6 @@
 .container {
-  font-family: "Major Mono Display";
-  font-size: 1.1em;
-  color: #86c232;
+  font-family: 'Noto Sans Mono', monospace;
+  font-size: 1.4em;
 }
 
 .nav-wrapper {
@@ -14,12 +13,30 @@
   display: flex;
 }
 
+.right-side {
+  display: flex;
+}
+
 .nav-wrapper > .left-side > div {
   margin-right: 20px;
 }
 
+.nav-wrapper > .right-side > div {
+  margin-right: 20px;
+}
+
 .link-wrapper {
-  height: 22px;
+  height: 28px;
   border-bottom: 1px solid transparent;
   transition: border-bottom 0.5s;
+}
+
+.link-wrapper a {
+  text-decoration: none;
+  color: #D1E8E2;
+  transition: color 0.5s;
+}
+
+.link-wrapper:hover {
+  border-bottom: 1px solid #D1E8E2;
 }

@@ -1,7 +1,9 @@
 body {
   margin: 0;
-  background-color: White;
-  font-family: "Major Mono Display";
+  background-color: #2C3531;
+  font-family: 'Noto Sans Mono', monospace;
+  background-image: url(../img/tim-mossholder-aFtibpO0hQQ-unsplash.jpg);
+  background-size: cover;
 }
 
 .title {
@@ -9,11 +11,13 @@ body {
   width: 100%;
   text-align: center;
   top: 30%;
+  color: #FFCB9A;
 }
 
 .title h1 {
-  width: 100%;
-  top: 30%;
-  font-size: 4.4em;
-  color: Black;
+  font-size: 6em;
+}
+
+.title h2 {
+  font-size: 1.5em;
 }

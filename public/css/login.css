@@ -1,5 +1,36 @@
 body {
   margin: 0;
-  background-color: White;
-  font-family: "Major Mono Display";
+  background-color: #2C3531;
+  font-family: 'Noto Sans Mono', monospace;
+}
+
+.form-container {
+  margin-top: 10%;
+  position: relative;
+  left: 40%;
+}
+
+.login-form {
+  position: absolute;
+  height: 600px;
+}
+
+.login-form h2{
+  font-size: 2.8em;
+  color: #D1E8E2;
+}
+
+.login {
+  background-color: #116466;
+  color: #D1E8E2;
+}
+
+input {
+  width: 100%;
+  margin-top: 15px;
+  border: none;
+  font-size: 1.5em;
+  background-color: #D9B08C;
+  border-radius: 6px;
+  text-indent: 8px;
 }

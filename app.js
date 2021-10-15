@@ -21,4 +21,8 @@ app.get('/register', (req, res) => {
   res.render("register")
 })
 
+app.get('/services', (req, res) => {
+  res.render("services")
+})
+
 app.listen(port, () => {console.log(`Listening on Port: ${port}`)})
