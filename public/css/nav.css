@@ -25,6 +25,11 @@
   margin-right: 20px;
 }
 
+.username {
+  text-decoration: none;
+  color: #D1E8E2;
+}
+
 .link-wrapper {
   height: 28px;
   border-bottom: 1px solid transparent;

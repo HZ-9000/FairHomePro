@@ -14,14 +14,13 @@
     </div>
 
     <div class="form-container">
-      <form class="register-form">
+      <form action="/register" method="POST" class="register-form">
         <h2>Register</h2>
-        <input type="text" id="name" placeholder="Name"><br>
-        <input type="email" id="email" placeholder="Email"><br>
-        <input type="text" id="password" placeholder="Password"><br>
+        <input type="text" id="name" placeholder="Name" name="name" required><br>
+        <input type="email" id="email" placeholder="Email" name="email" required><br>
+        <input type="text" id="password" placeholder="Password" name="password" required><br>
         <input type="submit" class="submit" value="Create">
       </form>
-
     </div>
   </div>
 </body>
