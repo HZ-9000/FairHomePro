@@ -19,9 +19,60 @@
         <input type="text" id="name" placeholder="Name" name="name" required><br>
         <input type="email" id="email" placeholder="Email" name="email" required><br>
         <input type="text" id="password" placeholder="Password" name="password" required><br>
+
+        <h2>Bank Info</h2>
+        <input type="text" id="name" placeholder="CreditCard#" name="name" required><br>
+        <input type="email" id="email" placeholder="Zipcode" name="email" required><br>
+        <input type="text" id="password" placeholder="Address" name="password" required><br>
+
+        <label class="label" for="info_switch">Buisness</label>
+        <input id="info_switch" type="checkbox" onclick="ShowBusiness()"/>
+
+        <div id="HomeOwner">
+          <h2>Home Details</h2>
+          <input type="text" id="name" placeholder="Type of Home" name="name"><br>
+          <input type="text" id="name" placeholder="Square Footage" name="name"><br>
+          <input type="text" id="name" placeholder="# of Floors" name="name"><br>
+          <input type="text" id="name" placeholder="Construction type" name="name"><br>
+          <input type="text" id="name" placeholder="yard size (sq ft)" name="name"><br>
+        </div>
+
+        <div id="BuisnessOwner">
+          <h2>Buisness</h2>
+          <input type="text" id="name" placeholder="Buisness Name" name="name"><br>
+          <input type="text" id="name" placeholder="Money" name="name"><br>
+        </div>
         <input type="submit" class="submit" value="Create">
       </form>
     </div>
+
+    <div class="HomeOwner">
+
+    </div>
   </div>
+
+  <script>
+  function ShowHome() {
+    var x = document.getElementById("HomeOwner");
+    var y = document.getElementById("BuisnessOwner");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+  function ShowBusiness() {
+    var x = document.getElementById("BuisnessOwner");
+    var y = document.getElementById("HomeOwner");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      y.style.display = "none";
+    } else {
+      x.style.display = "none";
+      y.style.display = "block";
+    }
+  }
+</script>
 </body>
 </html>
