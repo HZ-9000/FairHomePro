@@ -4,7 +4,7 @@ A Home care market place where users can find contractors for different home imp
 # How to view the web page
 1. clone the repository using:
 
-git clone https://github.com/HZ-2000/360Project.git
+git clone https://github.com/HZ-2000/FairHomePro.git
 
 2. navigate to the folder where the repository is cloned
 
