@@ -15,10 +15,23 @@ body {
   height: 600px;
 }
 
-.label {
-  padding-top: 20px;
+.label1 {
   color: #D1E8E2;
   font-size: 1.8em;
+  display: block;
+}
+
+.info_switch {
+  vertical-align: middle;
+  position: relative;
+}
+
+#BuisnessOwner {
+  display: none;
+}
+
+#HomeOwner {
+  display: block;
 }
 
 .register-form h2{
@@ -34,7 +47,7 @@ body {
 }
 
 input {
-  width: 100%;
+  width: 200%;
   margin-top: 15px;
   border: none;
   font-size: 1.5em;

@@ -21,12 +21,14 @@
         <input type="text" id="password" placeholder="Password" name="password" required><br>
 
         <h2>Bank Info</h2>
-        <input type="text" id="name" placeholder="CreditCard#" name="name" required><br>
-        <input type="email" id="email" placeholder="Zipcode" name="email" required><br>
-        <input type="text" id="password" placeholder="Address" name="password" required><br>
+        <input type="text" id="name" placeholder="CreditCard#" name="name" ><br>
+        <input type="email" id="email" placeholder="Zipcode" name="email" ><br>
+        <input type="text" id="password" placeholder="Address" name="password" ><br>
 
-        <label class="label" for="info_switch">Buisness</label>
-        <input id="info_switch" type="checkbox" onclick="ShowBusiness()"/>
+        <label class="label1">
+          Buisness
+          <input class="info_switch" type="checkbox" onclick="ShowBusiness()"/>
+        </label>
 
         <div id="HomeOwner">
           <h2>Home Details</h2>
@@ -52,19 +54,10 @@
   </div>
 
   <script>
-  function ShowHome() {
-    var x = document.getElementById("HomeOwner");
-    var y = document.getElementById("BuisnessOwner");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
 
   function ShowBusiness() {
-    var x = document.getElementById("BuisnessOwner");
-    var y = document.getElementById("HomeOwner");
+    var y = document.getElementById("BuisnessOwner");
+    var x = document.getElementById("HomeOwner");
     if (x.style.display === "none") {
       x.style.display = "block";
       y.style.display = "none";
