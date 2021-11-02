@@ -11,6 +11,12 @@ const login_succesful = false;
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
+const mongoose = require('mongoose')
+const User = require('./models/Users')
+const dbURI = process.env.DBURI
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
+  .then((result) => app.listen(port, () => {console.log(`Listening on Port: ${port}`)}))
+  .catch((err) => console.log(err))
 //temporary
 const users = []
 
@@ -64,6 +70,14 @@ app.post('/register', async(req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     //---------insert data base------------
+    const user = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: hashedPassword
+    })
+
+    user.save()
+
     users.push({
       id: Date.now().toString(),
       name: req.body.name,
@@ -108,6 +122,3 @@ function checkNotAuthenticated(req, res, next) {
 
   next()
 }
-
-
-app.listen(port, () => {console.log(`Listening on Port: ${port}`)})
