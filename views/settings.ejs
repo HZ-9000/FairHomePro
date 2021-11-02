@@ -16,8 +16,20 @@
       <h1>Settings</h1>
     </div>
 
-    <div class=""
+    <div class="form-container">
+      <form action="/complaints" method="POST" class="complaint-form">
+        <h2>Update Contact Info</h2>
+        <input type="text" id="name" placeholder="Name" name="name" required><br>
+        <input type="email" id="email" placeholder="Email" name="email" required><br>
+        <input type="text" id="password" placeholder="Password" name="password" required><br>
 
+        <h2>Update Bank Info</h2>
+        <input type="text" id="CreditCard#" placeholder="CreditCard#" name="CreditCard#"><br>
+        <input type="email" id="Zipcode" placeholder="Zipcode" name="Zipcode"><br>
+        <input type="text" id="Address" placeholder="Address" name="Address"><br>
+        <input type="submit" class="submit" value="Update">
+      </form>
+  </div>
   </div>
 </body>
 </html>

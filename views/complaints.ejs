@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FairHomePro</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/services.css"/>
+  <link rel="stylesheet" href="css/complaints.css"/>
 </head>
 <body>
   <div class="home-container">
@@ -16,6 +16,18 @@
       <h1>File a Complaint</h1>
     </div>
 
+    <div class="form-container">
+      <form action="/complaints" method="POST" class="complaint-form">
+        <h2>Contact Info</h2>
+        <input type="text" id="name" placeholder="Name" name="name" required><br>
+        <input type="email" id="email" placeholder="Email" name="email" required><br>
+
+        <h2>Complaint recipiant</h2>
+        <input type="text" id="Recipiant_Name" placeholder="Recipiant Name (full)" name="Recipiant_Name"><br>
+        <input type="email" id="BuisnessName" placeholder="Buisness Name" name="BuisnessName"><br>
+        <textarea id="complaint" placeholder="Complaint" name="Complaint" rows="15" cols="50"></textarea>
+        <input type="submit" class="submit" value="File">
+      </form>
   </div>
 </body>
 </html>

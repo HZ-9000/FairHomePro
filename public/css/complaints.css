@@ -32,6 +32,16 @@ body {
   margin-bottom: 40%;
 }
 
+textarea {
+  width: 50%;
+  margin-top: 15px;
+  border: none;
+  font-size: 1.5em;
+  background-color: #D9B08C;
+  border-radius: 6px;
+  text-indent: 8px;
+}
+
 input {
   width: 50%;
   margin-top: 15px;
