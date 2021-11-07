@@ -1,16 +1,16 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-
+//----------------Setup-------------------
 const express = require('express')
-const bcrypt = require('bcrypt')
-const initializePassport = require('./public/js/login.js')
 const app = express()
 const port = 3000
-const login_succesful = false;
-const passport = require('passport')
-const flash = require('express-flash')
-const session = require('express-session')
+app.use(express.static('public'))
+app.use(express.json())
+app.use("/css", express.static(__dirname + 'public/css'))
+app.set('view engine', 'ejs')
+
+//----------------MongoDB-------------------
 const mongoose = require('mongoose')
 const User = require('./models/Users')
 const dbURI = process.env.DBURI
@@ -18,16 +18,19 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
   .then((result) => app.listen(port, () => {console.log(`Listening on Port: ${port}`)}))
   .catch((err) => console.log(err))
 
+//----------------Login---------------------
+const passport = require('passport')
+const bcrypt = require('bcrypt')
+const flash = require('express-flash')
+const session = require('express-session')
+const initializePassport = require('./public/js/login.js')
+
 initializePassport(
   passport,
   email => User.find({email : email}).then(result => result[0]),
   id => User.find({_id : id}).then(result => result[0])
 )
 
-//static files
-app.use(express.static('public'))
-app.use(express.json())
-app.use("/css", express.static(__dirname + 'public/css'))
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
@@ -37,8 +40,6 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-
-app.set('view engine', 'ejs')
 
 //------------general site---------------------
 
