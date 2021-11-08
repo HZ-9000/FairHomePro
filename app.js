@@ -13,6 +13,7 @@ app.set('view engine', 'ejs')
 //----------------MongoDB-------------------
 const mongoose = require('mongoose')
 const User = require('./models/Users')
+const Bank = require('./models/Bank')
 const dbURI = process.env.DBURI
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
   .then((result) => app.listen(port, () => {console.log(`Listening on Port: ${port}`)}))
@@ -62,7 +63,7 @@ app.post('/login', passport.authenticate('local', {
 }))
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render("register",{login_succesful})
+  res.render("register")
 })
 
 app.post('/register', async(req, res) => {
@@ -74,14 +75,30 @@ app.post('/register', async(req, res) => {
       email: req.body.email,
       password: hashedPassword
     })
+    //user.save()
 
-    user.save()
+    const bank = new Bank({
+      email: req.body.email,
+      creditcard: req.body.CreditCard,
+      exp: req.body.exp,
+      CVV: req.body.CVV,
+      zipcode: req.body.Zipcode,
 
+    })
+    //bank.save()
+
+    if(req.body.info_switch ? true : false) {
+      //Business
+      console.log("Business")
+    }
+    else {
+      //Home Owner
+      console.log("home owner")
+    }
     res.redirect('/login')
   } catch {
     res.redirect('/register')
   }
-  console.log(users)
 })
 
 //------------Main user hub-----------------

@@ -21,7 +21,7 @@ body {
   display: block;
 }
 
-.info_switch {
+#info_switch {
   vertical-align: middle;
   position: relative;
 }

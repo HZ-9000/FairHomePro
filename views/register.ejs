@@ -21,13 +21,14 @@
         <input type="text" id="password" placeholder="Password" name="password" required><br>
 
         <h2>Bank Info</h2>
-        <input type="text" id="CreditCard#" placeholder="CreditCard#" name="CreditCard#"><br>
-        <input type="email" id="Zipcode" placeholder="Zipcode" name="Zipcode"><br>
-        <input type="text" id="Address" placeholder="Address" name="Address"><br>
+        <input type="text" id="CreditCard#" placeholder="CreditCard#" name="CreditCard" required><br>
+        <input type="text" id="Exp" placeholder="Exp. MM/YY" name="exp" required><br>
+        <input type="email" id="CVV" placeholder="CVV" name="CVV" required><br>
+        <input type="email" id="Zipcode" placeholder="Zipcode" name="Zipcode" required><br>
 
         <label class="label1">
           Buisness
-          <input class="info_switch" type="checkbox" onclick="ShowBusiness()"/>
+          <input id="info_switch" type="checkbox" name="info_switch" onclick="ShowBusiness()"/>
         </label>
 
         <div id="HomeOwner">
@@ -56,7 +57,9 @@
   function ShowBusiness() {
     var y = document.getElementById("BuisnessOwner");
     var x = document.getElementById("HomeOwner");
-    if (x.style.display === "none") {
+    var check = document.querySelector('#info_switch').checked;
+
+    if (!check) {
       x.style.display = "block";
       y.style.display = "none";
     } else {
