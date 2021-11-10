@@ -14,7 +14,7 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  CVV: {
+  cvv: {
     type: Number,
     required: true
   },

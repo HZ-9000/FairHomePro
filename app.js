@@ -69,32 +69,37 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 app.post('/register', async(req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    var typeUser = "";
+    if(req.body.info_switch ? true : false) {
+      typeUser = "BuisnessOwner";
+      console.log("Business")
+    }
+    else {
+      //Home Owner
+      typeUser = "HomeOwner";
+      console.log("home owner")
+    }
     //---------insert data base------------
     const user = new User({
       name: req.body.name,
       email: req.body.email,
-      password: hashedPassword
+      password: hashedPassword,
+      typeOfUser: typeUser
     })
-    //user.save()
+
+    user.save()
+    console.log("save successful")
 
     const bank = new Bank({
       email: req.body.email,
       creditcard: req.body.CreditCard,
       exp: req.body.exp,
-      CVV: req.body.CVV,
+      cvv: req.body.CVV,
       zipcode: req.body.Zipcode,
-
     })
-    //bank.save()
 
-    if(req.body.info_switch ? true : false) {
-      //Business
-      console.log("Business")
-    }
-    else {
-      //Home Owner
-      console.log("home owner")
-    }
+    bank.save()
+
     res.redirect('/login')
   } catch {
     res.redirect('/register')
