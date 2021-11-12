@@ -15,6 +15,7 @@ const mongoose = require('mongoose')
 const User = require('./models/Users')
 const Bank = require('./models/Bank')
 const Home = require('./models/Home')
+const Buisness = require('./models/Buisness')
 const dbURI = process.env.DBURI
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
   .then((result) => app.listen(port, () => {console.log(`Listening on Port: ${port}`)}))
