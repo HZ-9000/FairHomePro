@@ -14,6 +14,7 @@ app.set('view engine', 'ejs')
 const mongoose = require('mongoose')
 const User = require('./models/Users')
 const Bank = require('./models/Bank')
+const Home = require('./models/Home')
 const dbURI = process.env.DBURI
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
   .then((result) => app.listen(port, () => {console.log(`Listening on Port: ${port}`)}))
@@ -69,22 +70,46 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 app.post('/register', async(req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    var typeUser = "";
+    var name ="";
+    var email ="";
+    var type ="";
+    var phone ="";
+    //---------insert data base------------
     if(req.body.info_switch ? true : false) {
-      typeUser = "BuisnessOwner";
+      //BuisnessOwner
+      name = req.body.BuisnessName;
+      email= req.body.BuisnessEmail;
+      type= "BuisnessOwner";
+      phone= req.body.BuisnessPhone;
+
       console.log("Business")
     }
     else {
       //Home Owner
-      typeUser = "HomeOwner";
+      name = req.body.name;
+      email= req.body.email;
+      type= "HomeOwner";
+      phone= req.body.phone;
+
+      const home = new Home({
+        email: req.body.email,
+        typeOfHome: req.body.HomeType,
+        sqft: req.body.Sqft,
+        floors: req.body.Floors,
+        consType: req.body.ConsType,
+        yardSize: req.body.YardSize
+      })
+
+      home.save()
       console.log("home owner")
     }
-    //---------insert data base------------
+
     const user = new User({
-      name: req.body.name,
-      email: req.body.email,
+      name: name,
+      email: email,
+      phone: phone,
       password: hashedPassword,
-      typeOfUser: typeUser
+      typeOfUser: type
     })
 
     user.save()

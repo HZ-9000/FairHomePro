@@ -15,10 +15,35 @@
 
     <div class="form-container">
       <form action="/register" method="POST" class="register-form">
-        <h2>Register</h2>
-        <input type="text" id="name" placeholder="Name" name="name" required><br>
-        <input type="email" id="email" placeholder="Email" name="email" required><br>
-        <input type="text" id="password" placeholder="Password" name="password" required><br>
+        <label class="label1">
+          Buisness <input id="info_switch" type="checkbox" name="info_switch" onclick="ShowBusiness()"/>
+        </label>
+
+        <div id="HomeOwner">
+          <h2>Register Home Owner</h2>
+          <input type="text" id="name" placeholder="Name" name="name"><br>
+          <input type="email" id="email" placeholder="Email" name="email"><br>
+          <input type="number" id="phone" placeholder="Phone" name="phone"><br>
+
+          <h2>Home Details</h2>
+          <input type="text" id="HomeType" placeholder="Type of Home" name="HomeType"><br>
+          <input type="number" id="Sqft" placeholder="Square Footage" name="Sqft"><br>
+          <input type="number" id="Floors" placeholder="# of Floors" name="Floors"><br>
+          <input type="text" id="ConsType" placeholder="Construction type" name="ConsType"><br>
+          <input type="number" id="YardSize" placeholder="yard size (sq ft)" name="YardSize"><br>
+        </div>
+
+        <div id="BuisnessOwner">
+          <h2>Register Buisness</h2>
+          <input type="text" id="name" placeholder="Buisness Name" name="BuisnessName"><br>
+          <input type="email" id="email" placeholder="Buisness Email" name="BuisnessEmail"><br>
+          <input type="number" id="phone" placeholder="Buisness Phone" name="BuisnessPhone"><br>
+
+          <h2>Buisness Details</h2>
+          <input type="text" id="#Employees" placeholder="# of Employees" name="#Employees"><br>
+          <input type="text" id="Imcome" placeholder="Income" name="Income"><br>
+          <input type="text" id="Description" placeholder="Description of Buisness" name="Description"><br>
+        </div>
 
         <h2>Bank Info</h2>
         <input type="number" id="CreditCard#" placeholder="CreditCard#" name="CreditCard" required><br>
@@ -26,27 +51,9 @@
         <input type="number" id="CVV" placeholder="CVV" name="CVV" required><br>
         <input type="number" id="Zipcode" placeholder="Zipcode" name="Zipcode" required><br>
 
-        <label class="label1">
-          Buisness
-          <input id="info_switch" type="checkbox" name="info_switch" onclick="ShowBusiness()"/>
-        </label>
+        <h2>Set Password</h2>
+        <input type="text" id="password" placeholder="Password" name="password" required><br>
 
-        <div id="HomeOwner">
-          <h2>Home Details</h2>
-          <input type="text" id="HomeType" placeholder="Type of Home" name="HomeType"><br>
-          <input type="text" id="Sqft" placeholder="Square Footage" name="Sqft"><br>
-          <input type="text" id="Floors" placeholder="# of Floors" name="Floors"><br>
-          <input type="text" id="ConsType" placeholder="Construction type" name="ConsType"><br>
-          <input type="text" id="YardSize" placeholder="yard size (sq ft)" name="YardSize"><br>
-        </div>
-
-        <div id="BuisnessOwner">
-          <h2>Buisness</h2>
-          <input type="text" id="BuisnessName" placeholder="Buisness Name" name="BuisnessName"><br>
-          <input type="text" id="#Employees" placeholder="# of Employees" name="#Employees"><br>
-          <input type="text" id="Imcome" placeholder="Income" name="Income"><br>
-          <input type="text" id="Description" placeholder="Description of Buisness" name="Description"><br>
-        </div>
         <input type="submit" class="submit" value="Create">
       </form>
     </div>
