@@ -120,6 +120,10 @@ app.get('/complaints', checkAuthenticated, (req, res) => {
   res.render("complaints",{name: req.user.name})
 })
 
+app.get('/notifications', checkAuthenticated, (req, res) => {
+  res.render("notifications",{name: req.user.name})
+})
+
 //---------authentication checks--------------
 
 function checkAuthenticated(req, res, next) {
