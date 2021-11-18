@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const servicesSchema = new Schema({
-  email: {
+const contractSchema = new Schema({
+  EmailBuisness: {
+    type: String,
+    required: true
+  },
+  EmailHome: {
     type: String,
     required: true
   },
@@ -10,20 +14,12 @@ const servicesSchema = new Schema({
     type: String,
     required: true
   },
-  pricePerUnit: {
-    type: String,
-    required: true
-  },
-  unit: {
-    type: String,
-    required: true
-  },
-  Description: {
+  status: {
     type: String,
     required: true
   }
 }, { timestamps: true });
 
-const Services = mongoose.model('Services', servicesSchema);
+const Contract = mongoose.model('Cotnract', contractSchema);
 
-module.exports = Services;
+module.exports = Contract;

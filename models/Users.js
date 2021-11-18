@@ -21,6 +21,10 @@ const userSchema = new Schema({
   typeOfUser: {
     type: String,
     required: true
+  },
+  PrimaryAddress: {
+    type: String,
+    required: true
   }
 }, { timestamps: true });
 

@@ -21,6 +21,9 @@ const bankSchema = new Schema({
   zipcode: {
     type: Number,
     required: true
+  },
+  pin: {
+    type: Number
   }
 }, { timestamps: true });
 

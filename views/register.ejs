@@ -24,6 +24,7 @@
           <input type="text" id="name" placeholder="Name" name="name"><br>
           <input type="email" id="email" placeholder="Email" name="email"><br>
           <input type="number" id="phone" placeholder="Phone" name="phone"><br>
+          <input type="text" id="address" placeholder="Primary Address" name="PrimaryAddress"><br>
 
           <h2>Home Details</h2>
           <input type="text" id="HomeType" placeholder="Type of Home" name="HomeType"><br>
@@ -31,6 +32,8 @@
           <input type="number" id="Floors" placeholder="# of Floors" name="Floors"><br>
           <input type="text" id="ConsType" placeholder="Construction type" name="ConsType"><br>
           <input type="number" id="YardSize" placeholder="yard size (sq ft)" name="YardSize"><br>
+          <input type="text" id="Plants" placeholder="Plants (Y/N)" name="plants"><br>
+          <input type="text" id="address" placeholder="Home Address" name="HomeAddress"><br>
         </div>
 
         <div id="BuisnessOwner">
@@ -38,11 +41,12 @@
           <input type="text" id="name" placeholder="Buisness Name" name="BuisnessName"><br>
           <input type="email" id="email" placeholder="Buisness Email" name="BuisnessEmail"><br>
           <input type="number" id="phone" placeholder="Buisness Phone" name="BuisnessPhone"><br>
+          <input type="text" id="address" placeholder="Buisness Address" name="BuisnessAddress"><br>
 
-          <h2>Buisness Details</h2>
-          <input type="text" id="#Employees" placeholder="# of Employees" name="#Employees"><br>
-          <input type="text" id="Imcome" placeholder="Income" name="Income"><br>
-          <input type="text" id="Description" placeholder="Description of Buisness" name="Description"><br>
+          <h2>Add Service Areas</h2>
+          <div id="service_areas">
+            <button class="create_button" onclick="create()">Create</button>
+          </div>
         </div>
 
         <h2>Bank Info</h2>
@@ -50,6 +54,7 @@
         <input type="text" id="Exp" placeholder="Exp. MM/YY" name="exp" required><br>
         <input type="number" id="CVV" placeholder="CVV" name="CVV" required><br>
         <input type="number" id="Zipcode" placeholder="Zipcode" name="Zipcode" required><br>
+        <input type="number" id="PIN" placeholder="PIN (only for Debit)" name="PIN" required><br>
 
         <h2>Set Password</h2>
         <input type="text" id="password" placeholder="Password" name="password" required><br>
@@ -73,6 +78,22 @@
       x.style.display = "none";
       y.style.display = "block";
     }
+  }
+
+  var i = 0;
+  function create()
+  {
+    //create div for entry
+    var element = document.createElement("INPUT");
+    element.setAttribute("id", "service_area");
+    element.setAttribute("type", "text");
+    element.setAttribute("placeholder", "Service Area");
+    element.setAttribute("name", ("service" + i));
+    document.getElementById("service_areas").appendChild(element);
+
+    var space = document.createElement("BR");
+    document.getElementById(("service_area" + i)).appendChild(space);
+    i++;
   }
 </script>
 </body>

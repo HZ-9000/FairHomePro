@@ -25,6 +25,14 @@ const homeSchema = new Schema({
   yardSize: {
     type: Number,
     required: true
+  },
+  plants: {
+    type: String,
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
   }
 }, { timestamps: true });
 

@@ -12,10 +12,16 @@ app.set('view engine', 'ejs')
 
 //----------------MongoDB-------------------
 const mongoose = require('mongoose')
+//collections
 const User = require('./models/Users')
 const Bank = require('./models/Bank')
 const Home = require('./models/Home')
-const Buisness = require('./models/Buisness')
+const Area = require('./models/Areas')
+const Complaint = require('./models/Complaints')
+const Contract = require('./models/Contracts')
+//const License = require('./models/License')
+const Service = require('./models/Services')
+const Specialtie = require('./models/Specialties')
 const dbURI = process.env.DBURI
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
   .then((result) => app.listen(port, () => {console.log(`Listening on Port: ${port}`)}))
@@ -75,6 +81,7 @@ app.post('/register', async(req, res) => {
     var email ="";
     var type ="";
     var phone ="";
+    var address ="";
     //---------insert data base------------
     if(req.body.info_switch ? true : false) {
       //BuisnessOwner
@@ -82,6 +89,7 @@ app.post('/register', async(req, res) => {
       email= req.body.BuisnessEmail;
       type= "BuisnessOwner";
       phone= req.body.BuisnessPhone;
+      address= req.body.PrimaryAddress
 
       console.log("Business")
     }
@@ -91,6 +99,7 @@ app.post('/register', async(req, res) => {
       email= req.body.email;
       type= "HomeOwner";
       phone= req.body.phone;
+      address= req.body.BuisnessAddress
 
       const home = new Home({
         email: req.body.email,
@@ -98,7 +107,9 @@ app.post('/register', async(req, res) => {
         sqft: req.body.Sqft,
         floors: req.body.Floors,
         consType: req.body.ConsType,
-        yardSize: req.body.YardSize
+        yardSize: req.body.YardSize,
+        plants: req.body.plants,
+        address: req.body.HomeAddress
       })
 
       home.save()
@@ -110,7 +121,8 @@ app.post('/register', async(req, res) => {
       email: email,
       phone: phone,
       password: hashedPassword,
-      typeOfUser: type
+      typeOfUser: type,
+      address: address
     })
 
     user.save()
@@ -122,6 +134,7 @@ app.post('/register', async(req, res) => {
       exp: req.body.exp,
       cvv: req.body.CVV,
       zipcode: req.body.Zipcode,
+      pin: req.body.PIN
     })
 
     bank.save()
@@ -135,19 +148,20 @@ app.post('/register', async(req, res) => {
 //------------Main user hub-----------------
 
 app.get('/services', checkAuthenticated, (req, res) => {
+  console.log(req.user.name)
   res.render("services",{name: req.user.name})
 })
 
 app.get('/settings', checkAuthenticated, (req, res) => {
-  res.render("settings",{name: req.user.name})
+  res.render("settings",{name: req.user.email})
 })
 
 app.get('/complaints', checkAuthenticated, (req, res) => {
-  res.render("complaints",{name: req.user.name})
+  res.render("complaints",{name: req.user.email})
 })
 
 app.get('/notifications', checkAuthenticated, (req, res) => {
-  res.render("notifications",{name: req.user.name})
+  res.render("notifications",{name: req.user.email})
 })
 
 //---------authentication checks--------------

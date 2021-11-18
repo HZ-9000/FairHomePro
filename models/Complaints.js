@@ -1,29 +1,25 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const servicesSchema = new Schema({
-  email: {
+const complaintSchema = new Schema({
+  RecipiantEmail: {
     type: String,
     required: true
   },
-  TypeOfService: {
-    type: String,
-    required: true
-  },
-  pricePerUnit: {
-    type: String,
-    required: true
-  },
-  unit: {
+  SenderEmail: {
     type: String,
     required: true
   },
   Description: {
     type: String,
     required: true
+  },
+  status: {
+    type: String,
+    required: true
   }
 }, { timestamps: true });
 
-const Services = mongoose.model('Services', servicesSchema);
+const Complaint = mongoose.model('License', complaintSchema);
 
-module.exports = Services;
+module.exports = Complaint;
