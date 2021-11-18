@@ -17,46 +17,20 @@
     </div>
 
     <div class="services-container">
+      <% if(homes.length > 0){ %>
+        <% homes.forEach(home => { %>
       <div class="service-container">
         <div class="details">
-          <h1>Service: lawn mowing</h1>
-          <h1>Provider: Greece</h1>
-          <h1>Price: $4.44</h1>
+          <h1>Floors: <%=home.floors%></h1>
+          <h1>Type of home: <%=home.typeOfHome%></h1>
+          <h1>Yard Size: <%=home.yardSize%></h1>
           <button class="place-bid" onclick="placeBid()">Place Bid</button>
         </div>
-
-        <div class="description">
-          <p>Description</p>
-        </div>
       </div>
-
-      <div class="service-container">
-        <div class="details">
-          <h1>Service: lawn mowing</h1>
-          <h1>Provider: Greece</h1>
-          <h1>Price: $4.44</h1>
-          <button class="place-bid" onclick="placeBid()">Place Bid</button>
-        </div>
-
-        <div class="description">
-          <p>Description</p>
-        </div>
-      </div>
-
-      <div class="service-container">
-        <div class="details">
-          <h1>Service: lawn mowing</h1>
-          <h1>Provider: Greece</h1>
-          <h1>Price: $4.44</h1>
-          <button class="place-bid" onclick="placeBid()">Place Bid</button>
-        </div>
-
-        <div class="description">
-          <p>Description</p>
-        </div>
-      </div>
-
-    </div>
+      <%})%>
+      <% } else { %>
+        <h1>No current homes</h1>
+      <%}%>
 
   </div>
 </body>

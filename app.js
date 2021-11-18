@@ -89,7 +89,7 @@ app.post('/register', async(req, res) => {
       email= req.body.BuisnessEmail;
       type= "BuisnessOwner";
       phone= req.body.BuisnessPhone;
-      address= req.body.PrimaryAddress
+      address= req.body.BuisnessAddress;
 
       console.log("Business")
     }
@@ -99,7 +99,7 @@ app.post('/register', async(req, res) => {
       email= req.body.email;
       type= "HomeOwner";
       phone= req.body.phone;
-      address= req.body.BuisnessAddress
+      address= req.body.PrimaryAddress;
 
       const home = new Home({
         email: req.body.email,
@@ -122,7 +122,7 @@ app.post('/register', async(req, res) => {
       phone: phone,
       password: hashedPassword,
       typeOfUser: type,
-      address: address
+      PrimaryAddress: address
     })
 
     user.save()
@@ -148,8 +148,13 @@ app.post('/register', async(req, res) => {
 //------------Main user hub-----------------
 
 app.get('/services', checkAuthenticated, (req, res) => {
-  console.log(req.user.name)
-  res.render("services",{name: req.user.name})
+  Home.find()
+    .then((result) => {
+      res.render("services",{name: req.user.name, homes: result})
+    })
+    .catch((err) => {
+      condole.log(err)
+    })
 })
 
 app.get('/settings', checkAuthenticated, (req, res) => {
