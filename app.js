@@ -19,7 +19,7 @@ const Home = require('./models/Home')
 const Area = require('./models/Areas')
 const Complaint = require('./models/Complaints')
 const Contract = require('./models/Contracts')
-//const License = require('./models/License')
+const License = require('./models/License')
 const Service = require('./models/Services')
 const Specialtie = require('./models/Specialties')
 const dbURI = process.env.DBURI
@@ -91,6 +91,30 @@ app.post('/register', async(req, res) => {
       phone= req.body.BuisnessPhone;
       address= req.body.BuisnessAddress;
 
+      //add new services
+      console.log(req.body.areas)
+
+      //add service areas
+      req.body.areas.forEach(temp => {
+        const area = new Area({
+          email: email,
+          ServiceArea: temp
+        })
+
+        area.save();
+      });
+
+      //add licenses
+      req.body.licenses.forEach(temp => {
+        const license = new License({
+          email: email,
+          ServiceArea: temp
+        })
+
+        license.save();
+      });
+
+
       console.log("Business")
     }
     else {
@@ -129,7 +153,7 @@ app.post('/register', async(req, res) => {
     console.log("save successful")
 
     const bank = new Bank({
-      email: req.body.email,
+      email: email,
       creditcard: req.body.CreditCard,
       exp: req.body.exp,
       cvv: req.body.CVV,

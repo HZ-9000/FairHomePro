@@ -6,16 +6,12 @@ const areaSchema = new Schema({
     type: String,
     required: true
   },
-  TypeOfService: {
-    type: String,
-    required: true
-  },
   ServiceArea: {
     type: String,
     required: true
   }
 }, { timestamps: true });
 
-const Area = mongoose.model('Specialties', areaSchema);
+const Area = mongoose.model('Area', areaSchema);
 
 module.exports = Area;

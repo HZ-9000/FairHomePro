@@ -8,6 +8,7 @@ body {
   margin-top: 5%;
   position: relative;
   left: 15%;
+  max-width: 200%;
 }
 
 .register-form {
@@ -44,6 +45,11 @@ body {
   background-color: #116466;
   color: #D1E8E2;
   margin-bottom: 40%;
+}
+
+.add {
+  background-color: #116466;
+  color: #D1E8E2;
 }
 
 input {

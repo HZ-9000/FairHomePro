@@ -5,33 +5,38 @@ body {
   font-family: 'Noto Sans Mono', monospace;
 }
 
+.home-container {
+  display: flex;
+  width: auto;
+  height: auto;
+}
+
 .title {
-  margin-left: 15%;
+  margin-left: 10%;
+  font-size: 1.4em;
 }
 
 .service-container {
   font-size: .8em;
   background-color: #116466;
-  padding: 20px;
-  width: 70%;
-  margin-left: 15%;
+  padding: 10px;
+  width: 130%;
+  margin-left: 10%;
   margin-bottom: 20px;
 }
 
 .details {
-  display: flex;
-  justify-content: space-between;
   margin-left: 20px;
   margin-right: 20px;
+  font-size: .8em;
+}
+
+.service-details-container {
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .description {
-  margin-left: 20px;
-}
-
-.place-bid {
-  margin-top: 20px;
-  height: 50%;
-  width: 10%;
-
+  margin-left: 10%;
+  font-size: 1.2em;
 }

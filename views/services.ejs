@@ -8,30 +8,59 @@
   <link rel="stylesheet" href="css/services.css"/>
 </head>
 <body>
-  <div class="home-container">
-    <div class="nav">
-      <%- include("partials/hub_Header.ejs") -%>
-    </div>
-    <div class="title">
-      <h1>List of Services</h1>
-    </div>
+  <div class="nav">
+    <%- include("partials/hub_Header.ejs") -%>
+  </div>
 
+  <div class="home-container">
     <div class="services-container">
+      <div class="title">
+        <h1>List of Services</h1>
+      </div>
       <% if(homes.length > 0){ %>
         <% homes.forEach(home => { %>
-      <div class="service-container">
-        <div class="details">
-          <h1>Floors: <%=home.floors%></h1>
-          <h1>Type of home: <%=home.typeOfHome%></h1>
-          <h1>Yard Size: <%=home.yardSize%></h1>
-          <button class="place-bid" onclick="placeBid()">Place Bid</button>
-        </div>
-      </div>
+          <div class="service-container" onclick="placeBid(<%= JSON.stringify(home)%>)">
+            <div class="details">
+              <h1>Floors: <%=home.floors%></h1>
+              <h1>Floors: <%=home.floors%></h1>
+            </div>
+          </div>
       <%})%>
       <% } else { %>
         <h1>No current homes</h1>
       <%}%>
+    </div>
 
+    <div class="service-details-container">
+      <div class="title">
+        <h1>Job info</h1>
+      </div>
+
+      <div class="description">
+        <h2 id="des-title">title: Lawn Mowing</h2>
+        <h2 id="des-provider">Provider: H&M services</h2>
+        <h2 id="des-typeofservice">Type of Service: Gardening</h2>
+        <h2 id="des-price">Price: 1.25/hr</h2>
+        <p id="des-description">blah blah balh balh balh</p>
+      </div>
+    </div>
   </div>
+
+<script>
+  function placeBid(info)
+  {
+    const title = document.getElementById('des-title');
+    const provider = document.getElementById('des-provider');
+    const typeofservice = document.getElementById('des-typeofservice');
+    const price = document.getElementById('des-price');
+    const description = document.getElementById('des-description');
+
+    title.innerHTML = 'Title: ' + info.email;
+    provider.innerHTML = 'Provider: ' + info.consType;
+    typeofservice.innerHTML = 'Type of Service: ' + info.typeOfHome;
+    price.innerHTML = 'Price: ' + info.floors + '/' + info.floors;
+    description.innerHTML = info.yardSize;
+  }
+</script>
 </body>
 </html>

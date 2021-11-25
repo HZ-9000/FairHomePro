@@ -20,6 +20,6 @@ const complaintSchema = new Schema({
   }
 }, { timestamps: true });
 
-const Complaint = mongoose.model('License', complaintSchema);
+const Complaint = mongoose.model('Complaint', complaintSchema);
 
 module.exports = Complaint;

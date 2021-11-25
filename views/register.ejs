@@ -45,23 +45,32 @@
 
           <h2>Add Service Areas</h2>
           <div id="service_areas">
-            <button class="create_button" onclick="create()">Create</button>
+            <input type="button" class="add" value="Add" onclick="create_area()">
+          </div>
+
+          <h2>Add Licenses</h2>
+          <div id="add_licenses">
+            <input type="button" class="add" value="Add" onclick="create_license()">
+          </div>
+
+          <h2>Add Specialties</h2>
+          <div id="add_specialties">
+            <input type="button" class="add" value="Add" onclick="create_license()">
           </div>
         </div>
 
         <h2>Bank Info</h2>
-        <input type="number" id="CreditCard#" placeholder="CreditCard#" name="CreditCard" required><br>
-        <input type="text" id="Exp" placeholder="Exp. MM/YY" name="exp" required><br>
-        <input type="number" id="CVV" placeholder="CVV" name="CVV" required><br>
-        <input type="number" id="Zipcode" placeholder="Zipcode" name="Zipcode" required><br>
-        <input type="number" id="PIN" placeholder="PIN (only for Debit)" name="PIN" required><br>
+        <input type="number" id="CreditCard#" placeholder="CreditCard#" name="CreditCard"><br>
+        <input type="text" id="Exp" placeholder="Exp. MM/YY" name="exp"><br>
+        <input type="number" id="CVV" placeholder="CVV" name="CVV"><br>
+        <input type="number" id="Zipcode" placeholder="Zipcode" name="Zipcode"><br>
+        <input type="number" id="PIN" placeholder="PIN (only for Debit)" name="PIN"><br>
 
         <h2>Set Password</h2>
-        <input type="text" id="password" placeholder="Password" name="password" required><br>
+        <input type="text" id="password" placeholder="Password" name="password"><br>
 
         <input type="submit" class="submit" value="Create">
       </form>
-    </div>
   </div>
 
   <script>
@@ -80,20 +89,37 @@
     }
   }
 
-  var i = 0;
-  function create()
+  function create_area()
   {
     //create div for entry
     var element = document.createElement("INPUT");
     element.setAttribute("id", "service_area");
     element.setAttribute("type", "text");
     element.setAttribute("placeholder", "Service Area");
-    element.setAttribute("name", ("service" + i));
+    element.setAttribute("name", "areas");
     document.getElementById("service_areas").appendChild(element);
+  }
 
-    var space = document.createElement("BR");
-    document.getElementById(("service_area" + i)).appendChild(space);
-    i++;
+  function create_license()
+  {
+    //create div for entry
+    var element = document.createElement("INPUT");
+    element.setAttribute("id", "license");
+    element.setAttribute("type", "text");
+    element.setAttribute("placeholder", "License");
+    element.setAttribute("name", "license");
+    document.getElementById("add_licenses").appendChild(element);
+  }
+
+  function create_specialtie()
+  {
+    //create div for entry
+    var element = document.createElement("INPUT");
+    element.setAttribute("id", "license");
+    element.setAttribute("type", "text");
+    element.setAttribute("placeholder", "License");
+    element.setAttribute("name", "license");
+    document.getElementById("add_specialties").appendChild(element);
   }
 </script>
 </body>
