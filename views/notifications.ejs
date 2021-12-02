@@ -8,14 +8,59 @@
   <link rel="stylesheet" href="css/services.css"/>
 </head>
 <body>
+  <div class="nav">
+    <%- include("partials/hub_Header.ejs") -%>
+  </div>
+
   <div class="home-container">
-    <div class="nav">
-      <%- include("partials/hub_Header.ejs") -%>
-    </div>
-    <div class="title">
-      <h1>Notifications</h1>
+    <div class="services-container">
+      <div class="title">
+        <h1>List of Notfications</h1>
+      </div>
+      <% if(contracts.length > 0){ %>
+        <% contracts.forEach(contact => { %>
+          <div class="service-container" onclick="placeBid(<%= JSON.stringify(home)%>)">
+            <div class="details">
+              <h1>Service: <%=contact.TypeOfService%></h1>
+              <h1>Status: <%=contact.status%></h1>
+            </div>
+          </div>
+      <%})%>
+      <% } else { %>
+        <h1>No current contracts</h1>
+      <%}%>
     </div>
 
+    <div class="service-details-container">
+      <div class="title">
+        <h1>Info</h1>
+      </div>
+
+      <div class="description">
+        <h2 id="des-title"></h2>
+        <h2 id="des-provider"></h2>
+        <h2 id="des-typeofservice"></h2>
+        <h2 id="des-price"></h2>
+        <p id="des-description"></p>
+      </div>
+    </div>
   </div>
+
+<script>
+  function placeBid(info)
+  {
+    const title = document.getElementById('des-title');
+    const provider = document.getElementById('des-provider');
+    const typeofservice = document.getElementById('des-typeofservice');
+    const price = document.getElementById('des-price');
+    const description = document.getElementById('des-description');
+
+    title.innerHTML = 'Title: ' + info.email;
+    provider.innerHTML = 'Provider: ' + info.consType;
+    typeofservice.innerHTML = 'Type of Service: ' + info.typeOfHome;
+    price.innerHTML = 'Price: ' + info.floors + '/' + info.floors;
+    description.innerHTML = info.yardSize;
+  }
+</script>
 </body>
 </html>

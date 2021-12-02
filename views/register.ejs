@@ -55,7 +55,7 @@
 
           <h2>Add Specialties</h2>
           <div id="add_specialties">
-            <input type="button" class="add" value="Add" onclick="create_license()">
+            <input type="button" class="add" value="Add" onclick="create_specialtie()">
           </div>
         </div>
 
@@ -89,36 +89,34 @@
     }
   }
 
+  //create buttons
   function create_area()
   {
-    //create div for entry
     var element = document.createElement("INPUT");
     element.setAttribute("id", "service_area");
     element.setAttribute("type", "text");
     element.setAttribute("placeholder", "Service Area");
-    element.setAttribute("name", "areas");
+    element.setAttribute("name", "areas[]");
     document.getElementById("service_areas").appendChild(element);
   }
 
   function create_license()
   {
-    //create div for entry
     var element = document.createElement("INPUT");
     element.setAttribute("id", "license");
     element.setAttribute("type", "text");
     element.setAttribute("placeholder", "License");
-    element.setAttribute("name", "license");
+    element.setAttribute("name", "licenses");
     document.getElementById("add_licenses").appendChild(element);
   }
 
   function create_specialtie()
   {
-    //create div for entry
     var element = document.createElement("INPUT");
-    element.setAttribute("id", "license");
+    element.setAttribute("id", "specialtie");
     element.setAttribute("type", "text");
-    element.setAttribute("placeholder", "License");
-    element.setAttribute("name", "license");
+    element.setAttribute("placeholder", "Speacialtie");
+    element.setAttribute("name", "specialties");
     document.getElementById("add_specialties").appendChild(element);
   }
 </script>

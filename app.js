@@ -45,7 +45,8 @@ app.use(flash())
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: true,
+  cookie: {maxAge: 60 * 60 * 100 }
 }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -67,7 +68,8 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
 app.post('/login', passport.authenticate('local', {
   successRedirect: '/services',
   failureRedirect: '/login',
-  failureFlash: true
+  failureFlash: true,
+  session: true
 }))
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
@@ -76,6 +78,9 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 
 app.post('/register', async(req, res) => {
   try {
+
+    User.find()
+
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     var name ="";
     var email ="";
@@ -92,29 +97,57 @@ app.post('/register', async(req, res) => {
       address= req.body.BuisnessAddress;
 
       //add new services
-      console.log(req.body.areas)
 
       //add service areas
-      req.body.areas.forEach(temp => {
+      if(typeof req.body.areas == 'object' && req.body.areas != null){
+        req.body.areas.forEach(temp => {
+          const area = new Area({
+            email: email,
+            ServiceArea: temp
+          })
+
+          area.save();
+        });
+      }
+      else if(req.body.areas != null){
         const area = new Area({
           email: email,
-          ServiceArea: temp
+          ServiceArea: req.body.areas
         })
-
-        area.save();
-      });
+      }
 
       //add licenses
-      req.body.licenses.forEach(temp => {
+      if(typeof req.body.areas == 'object' && req.body.areas != null){
+        req.body.licenses.forEach(temp => {
+          const license = new License({
+            email: email,
+            LicenseName: temp
+          })
+
+          license.save();
+        });
+      } else if(req.body.areas != null){
         const license = new License({
           email: email,
-          ServiceArea: temp
+          LicenseName: req.bosy.licenses
+        })
+      }
+      //add specialties
+      if(typeof req.body.areas == 'object' && req.body.areas != null){
+      req.body.specialties.forEach(temp => {
+        const specialtie = new Specialtie({
+          email: email,
+          SpecialtieName: temp
         })
 
-        license.save();
+        specialtie.save();
       });
-
-
+    } else if(req.body.areas != null){
+      const specialtie = new Specialtie({
+        email: email,
+        SpecialtieName: req.body.specialties
+      })
+    }
       console.log("Business")
     }
     else {
@@ -182,15 +215,45 @@ app.get('/services', checkAuthenticated, (req, res) => {
 })
 
 app.get('/settings', checkAuthenticated, (req, res) => {
-  res.render("settings",{name: req.user.email})
+  let name = req.user.email;
+  console.log(name)
+  res.render("settings",{name: req.user.name, user_type: req.user.typeOfUser})
 })
 
 app.get('/complaints', checkAuthenticated, (req, res) => {
-  res.render("complaints",{name: req.user.email})
+  res.render("complaints",{name: req.user.name})
+})
+
+app.post('/complaints', checkAuthenticated, (req, res) => {
+    User.find({name : req.body.BuisnessName})
+    .then((result) => {
+      const complaint = new Complaint({
+        RecipiantEmail: result.email,
+        SenderEmail: req.user.email,
+        Description: req.body.Complaint_des,
+        status: 'unresolved'
+      })
+      res.redirect('/services');
+    })
+    .catch((err) => {
+      window.alert(err);
+      res.redirect('/complaints');
+    })
 })
 
 app.get('/notifications', checkAuthenticated, (req, res) => {
-  res.render("notifications",{name: req.user.email})
+  Contract.find()
+    .then((result) => {
+      res.render("notifications",{name: req.user.name, contracts: result})
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+})
+
+app.get('/logout', checkAuthenticated, (req, res) => {
+  req.logout()
+  res.redirect('/login')
 })
 
 //---------authentication checks--------------
