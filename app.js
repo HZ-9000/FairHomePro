@@ -22,6 +22,7 @@ const Contract = require('./models/Contracts')
 const License = require('./models/License')
 const Service = require('./models/Services')
 const Specialtie = require('./models/Specialties')
+
 const dbURI = process.env.DBURI
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
   .then((result) => app.listen(port, () => {console.log(`Listening on Port: ${port}`)}))
@@ -66,7 +67,7 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
 })
 
 app.post('/login', passport.authenticate('local', {
-  successRedirect: '/services',
+  successRedirect: '/notifications',
   failureRedirect: '/login',
   failureFlash: true,
   session: true
@@ -81,7 +82,7 @@ app.post('/register', async(req, res) => {
 
     User.find()
 
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     var name ="";
     var email ="";
     var type ="";
@@ -107,6 +108,7 @@ app.post('/register', async(req, res) => {
           })
 
           area.save();
+          console.log("saved areas ");
         });
       }
       else if(req.body.areas != null){
@@ -114,39 +116,45 @@ app.post('/register', async(req, res) => {
           email: email,
           ServiceArea: req.body.areas
         })
+        console.log("saved areas ");
+        area.save();
       }
 
       //add licenses
-      if(typeof req.body.areas == 'object' && req.body.areas != null){
+      if(typeof req.body.licenses == 'object' && req.body.licenses != null){
         req.body.licenses.forEach(temp => {
           const license = new License({
             email: email,
             LicenseName: temp
           })
-
+          console.log("saved licenses ");
           license.save();
         });
-      } else if(req.body.areas != null){
+      } else if(req.body.licenses != null){
         const license = new License({
           email: email,
-          LicenseName: req.bosy.licenses
+          LicenseName: req.body.licenses
         })
+
+        license.save();
       }
       //add specialties
-      if(typeof req.body.areas == 'object' && req.body.areas != null){
+      if(typeof req.body.specialties == 'object' && req.body.specialties != null){
       req.body.specialties.forEach(temp => {
         const specialtie = new Specialtie({
           email: email,
           SpecialtieName: temp
         })
-
+        console.log("saved specialties ");
         specialtie.save();
       });
-    } else if(req.body.areas != null){
+    } else if(req.body.specialties != null){
       const specialtie = new Specialtie({
         email: email,
         SpecialtieName: req.body.specialties
       })
+
+      specialtie.save();
     }
       console.log("Business")
     }
@@ -185,9 +193,18 @@ app.post('/register', async(req, res) => {
     user.save()
     console.log("save successful")
 
+    const creditcard = await bcrypt.hash(req.body.CreditCard, 10)
+    const cvv = await bcrypt.hash(req.body.CVV, 10)
+    const zipcode = await bcrypt.hash(req.body.Zipcode, 10)
+    if(req.body.PIN != null){
+      const pin1 = await bcrypt.hash(req.body.PIN, 10);
+    }else{
+      const pin1 = null;
+    }
+
     const bank = new Bank({
       email: email,
-      creditcard: req.body.CreditCard,
+      creditcard: creditcard,
       exp: req.body.exp,
       cvv: req.body.CVV,
       zipcode: req.body.Zipcode,
@@ -195,6 +212,8 @@ app.post('/register', async(req, res) => {
     })
 
     bank.save()
+
+    console.log("save successful")
 
     res.redirect('/login')
   } catch {
@@ -205,34 +224,61 @@ app.post('/register', async(req, res) => {
 //------------Main user hub-----------------
 
 app.get('/services', checkAuthenticated, (req, res) => {
-  Home.find()
+  Service.find()
     .then((result) => {
-      res.render("services",{name: req.user.name, homes: result})
+      res.render("services",{name: req.user.name, type: req.user.typeOfUser, services: result})
     })
     .catch((err) => {
       condole.log(err)
     })
 })
 
+app.post('/services', checkAuthenticated, (req, res) => {
+  Contract.find({date: req.body.date, time: req.body.time})
+    .then((result) => {
+      if(result.date == req.body.date){
+        window.alert("Date Taken");
+      }else{
+        const contract = new Contract({
+          EmailBuisness: req.body.provider,
+          EmailHome: req.user.email,
+          TypeOfService: req.body.service,
+          status: 'pending',
+          price: req.body.price,
+          unit: req.body.unit,
+          date: req.body.date,
+          time: req.body.time
+        })
+
+        contract.save();
+
+        res.redirect('/services');
+      }
+    })
+    .catch((err) => {
+
+    })
+})
+
 app.get('/settings', checkAuthenticated, (req, res) => {
-  let name = req.user.email;
-  console.log(name)
-  res.render("settings",{name: req.user.name, user_type: req.user.typeOfUser})
+  res.render("settings",{name: req.user.name, type: req.user.typeOfUser})
 })
 
 app.get('/complaints', checkAuthenticated, (req, res) => {
-  res.render("complaints",{name: req.user.name})
+  res.render("complaints",{name: req.user.name, type: req.user.typeOfUser,})
 })
 
 app.post('/complaints', checkAuthenticated, (req, res) => {
     User.find({name : req.body.BuisnessName})
     .then((result) => {
       const complaint = new Complaint({
-        RecipiantEmail: result.email,
+        RecipiantEmail: req.body.BuisnessName,
         SenderEmail: req.user.email,
         Description: req.body.Complaint_des,
         status: 'unresolved'
       })
+
+      complaint.save();
       res.redirect('/services');
     })
     .catch((err) => {
@@ -242,13 +288,69 @@ app.post('/complaints', checkAuthenticated, (req, res) => {
 })
 
 app.get('/notifications', checkAuthenticated, (req, res) => {
-  Contract.find()
+  if(req.user.typeOfUser == 'HomeOwner'){
+    Contract.find({ EmailHome: req.user.email })
+      .then((result) => {
+        res.render("notifications",{name: req.user.name, type: req.user.typeOfUser, contracts: result})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  } else {
+    Contract.find({ EmailBuisness: req.user.email })
+      .then((result) => {
+        res.render("notifications",{name: req.user.name, type: req.user.typeOfUser, contracts: result})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+})
+
+app.post('/notifications', checkAuthenticated, (req, res) => {
+  if(req.body.accept == 'on'){
+    Contract.findOneAndUpdate({ EmailBuisness: req.user.email, date: req.body.date , time: req.body.time },{ status: "Accepted" }, (error, data) => {
+      if(error){
+        console.log(error)
+      }else{
+        console.log(data)
+      }
+    })
+  }else {
+    Contract.findOneAndUpdate({ EmailBuisness: req.user.email, date: req.body.date, time: req.body.time },{ status: "Declined" }, (error, data) => {
+      if(error){
+        console.log(error)
+      }else{
+        console.log(data)
+      }
+    })
+  }
+
+  res.redirect('/notifications');
+})
+
+app.get('/add_services', checkAuthenticated, (req, res) => {
+  Service.find({email: req.user.email})
     .then((result) => {
-      res.render("notifications",{name: req.user.name, contracts: result})
+      res.render("add_services",{name: req.user.name, type: req.user.typeOfUser, services: result})
     })
     .catch((err) => {
       console.log(err)
     })
+})
+
+app.post('/add_services', checkAuthenticated, (req, res) => {
+  const service = new Service({
+    email: req.user.email,
+    TypeOfService: req.body.service_name,
+    pricePerUnit: req.body.price,
+    unit: req.body.unit,
+    Description: req.body.service_des
+  })
+
+  service.save();
+
+  res.redirect('/add_services');
 })
 
 app.get('/logout', checkAuthenticated, (req, res) => {

@@ -16,11 +16,11 @@ body {
   font-size: 1.4em;
 }
 
-.service-container {
+.contract-container {
   font-size: .8em;
   background-color: #116466;
   padding: 10px;
-  width: 150%;
+  width: 120%;
   margin-left: 10%;
   margin-bottom: 20px;
 }
@@ -31,7 +31,7 @@ body {
   font-size: .8em;
 }
 
-.service-details-container {
+.contract-details-container {
   margin-left: 10%;
   margin-right: 10%;
   width: 100%;
@@ -42,21 +42,19 @@ body {
   font-size: 1.2em;
 }
 
-.hiddendeets {
-  display: none;
-}
-
 #bid-form-container {
   display: none;
   margin-left: 10%;
 }
 
-input {
-  width: 50%;
-  margin-top: 15px;
-  border: none;
-  font-size: 1.5em;
-  background-color: #D9B08C;
-  border-radius: 6px;
-  text-indent: 8px;
+#accept-decline {
+  display: none;
+}
+
+#date {
+  display: none;
+}
+
+#time {
+  display: none;
 }

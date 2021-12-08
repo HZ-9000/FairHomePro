@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FairHomePro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/add_services.css"/>
+</head>
+<body>
+  <div class="home-container">
+    <div class="nav">
+      <%- include("partials/hub_Header.ejs") -%>
+    </div>
+
+    <div class="services-container">
+      <h1>List of Your Services</h1>
+      <% if(services.length > 0){ %>
+        <% services.forEach(service => { %>
+            <div class="details">
+              <h1>Service: <%=service.TypeOfService%></h1>
+              <h1>Price: <%=service.pricePerUnit%> / <%=service.unit%></h1>
+              <h1>Areas: <%=service.unit%></h1>
+            </div>
+      <%})%>
+      <% } else { %>
+        <h1>No current services</h1>
+      <%}%>
+    </div>
+
+    <div class="title">
+      <h1>Add Services</h1>
+    </div>
+
+    <div class="form-container">
+      <form action="/add_services" method="POST" class="add_service-form">
+        <h2>Service Details</h2>
+        <input type="text" id="service_name" placeholder="Service Name" name="service_name" required><br>
+        <input type="text" id="price" placeholder="Price" name="price" required><input type="text" id="unit" placeholder="Unit (EX: 1.25/hr)" name="unit" required><br>
+
+        <h2>Service Description</h2>
+        <textarea id="description" placeholder="Description of Service" name="service_des" rows="15" cols="50"></textarea>
+        <input type="submit" class="submit" value="File">
+      </form>
+  </div>
+  </div>
+</body>
+</html>

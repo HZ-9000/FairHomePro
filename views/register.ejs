@@ -15,9 +15,8 @@
 
     <div class="form-container">
       <form action="/register" method="POST" class="register-form">
-        <label class="label1">
-          Buisness <input id="info_switch" type="checkbox" name="info_switch" onclick="ShowBusiness()"/>
-        </label>
+        <input id="info_switch" type="checkbox" name="info_switch" onclick="ShowBusiness()"/>
+        <label for="info_switch">Buisness?</label>
 
         <div id="HomeOwner">
           <h2>Register Home Owner</h2>
@@ -96,7 +95,7 @@
     element.setAttribute("id", "service_area");
     element.setAttribute("type", "text");
     element.setAttribute("placeholder", "Service Area");
-    element.setAttribute("name", "areas[]");
+    element.setAttribute("name", "areas");
     document.getElementById("service_areas").appendChild(element);
   }
 

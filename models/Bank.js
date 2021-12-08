@@ -7,7 +7,7 @@ const bankSchema = new Schema({
     required: true
   },
   creditcard: {
-    type: Number,
+    type: String,
     required: true
   },
   exp: {
@@ -15,15 +15,15 @@ const bankSchema = new Schema({
     required: true
   },
   cvv: {
-    type: Number,
+    type: String,
     required: true
   },
   zipcode: {
-    type: Number,
+    type: String,
     required: true
   },
   pin: {
-    type: Number
+    type: String
   }
 }, { timestamps: true });
 

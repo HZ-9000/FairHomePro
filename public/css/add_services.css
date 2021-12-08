@@ -5,8 +5,20 @@ body {
   font-family: 'Noto Sans Mono', monospace;
 }
 
+.services-container{
+  margin-left: 1%;
+}
+
 .title {
   margin-left: 1%;
+}
+
+.details {
+  font-size: .6em;
+  background-color: #116466;
+  padding: 10px;
+  width: 50%;
+  margin-bottom: 20px;
 }
 
 .form-container {
@@ -29,10 +41,10 @@ body {
 .submit {
   background-color: #116466;
   color: #D1E8E2;
-  margin-bottom: 40%;
+  margin-bottom: 1%;
 }
 
-textarea {
+input {
   width: 50%;
   margin-top: 15px;
   border: none;
@@ -42,7 +54,7 @@ textarea {
   text-indent: 8px;
 }
 
-input {
+textarea {
   width: 50%;
   margin-top: 15px;
   border: none;

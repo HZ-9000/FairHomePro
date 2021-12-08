@@ -17,6 +17,22 @@ const contractSchema = new Schema({
   status: {
     type: String,
     required: true
+  },
+  price: {
+    type: String,
+    required: true
+  },
+  unit: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: String,
+    required: true
+  },
+  time: {
+    type: String,
+    required: true
   }
 }, { timestamps: true });
 

@@ -2,26 +2,30 @@
 <div class="container">
   <div class="nav-wrapper">
     <div class = "left-side">
-      <div class="link-wrapper">
-        <a href="/services">Services</a>
-      </div>
+      <% if(type == 'HomeOwner'){ %>
+        <div class="link-wrapper">
+          <a href="/services">Services</a>
+        </div>
+
+        <div class="link-wrapper">
+          <a href="/complaints">Complaint</a>
+        </div>
+      <% } %>
+
+      <% if(type == 'BuisnessOwner'){ %>
+        <div class="link-wrapper">
+          <a href="/add_services">+Service</a>
+        </div>
+      <% } %>
 
       <div class="link-wrapper">
-        <a href="/complaints">Complaint</a>
+        <a href="/notifications">Notifications</a>
       </div>
     </div>
 
     <div class = "right-side">
         <div class="username">
           <a><%= name %></a>
-        </div>
-
-        <div class="link-wrapper">
-          <a href="/notifications">Notifications</a>
-        </div>
-
-        <div class="link-wrapper">
-          <a href="/settings">Settings</a>
         </div>
 
         <div class="link-wrapper">

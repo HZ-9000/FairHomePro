@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FairHomePro</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/services.css"/>
+  <link rel="stylesheet" href="css/notifications.css"/>
 </head>
 <body>
   <div class="nav">
@@ -13,16 +13,16 @@
   </div>
 
   <div class="home-container">
-    <div class="services-container">
+    <div class="contracts-container">
       <div class="title">
         <h1>List of Notfications</h1>
       </div>
       <% if(contracts.length > 0){ %>
-        <% contracts.forEach(contact => { %>
-          <div class="service-container" onclick="placeBid(<%= JSON.stringify(home)%>)">
+        <% contracts.forEach(contract => { %>
+          <div class="contract-container" onclick="placeBid(<%= JSON.stringify(contract)%>);">
             <div class="details">
-              <h1>Service: <%=contact.TypeOfService%></h1>
-              <h1>Status: <%=contact.status%></h1>
+              <h1>Service: <%=contract.TypeOfService%></h1>
+              <h1>Status: <%=contract.status%></h1>
             </div>
           </div>
       <%})%>
@@ -31,17 +31,30 @@
       <%}%>
     </div>
 
-    <div class="service-details-container">
+    <div class="contract-details-container">
       <div class="title">
         <h1>Info</h1>
       </div>
 
       <div class="description">
         <h2 id="des-title"></h2>
+        <h2 id="des-status"></h2>
         <h2 id="des-provider"></h2>
-        <h2 id="des-typeofservice"></h2>
+        <h2 id="des-customer"></h2>
         <h2 id="des-price"></h2>
-        <p id="des-description"></p>
+        <h2 id="des-date"></h2>
+        <form action="/notifications" method="POST" class="contract-form">
+          <div id="accept-decline">
+            <input id="accept" type="checkbox" name="accept" onclick="switch_box('accept')"/>
+            <label for="accept">Accept</label>
+            <input id="decline" type="checkbox" name="decline" onclick="switch_box('decline')"/>
+            <label for="decline">Decline</label>
+          </div>
+
+          <input type="text" id="date" name="date">
+          <input type="text" id="time" name="time">
+          <input type="submit" id="submit" value="Submit">
+        </form>
       </div>
     </div>
   </div>
@@ -49,17 +62,54 @@
 <script>
   function placeBid(info)
   {
+    const Buttons = document.getElementById('accept-decline');
     const title = document.getElementById('des-title');
+    const status = document.getElementById('des-status');
     const provider = document.getElementById('des-provider');
-    const typeofservice = document.getElementById('des-typeofservice');
+    const customer = document.getElementById('des-customer');
     const price = document.getElementById('des-price');
-    const description = document.getElementById('des-description');
+    const date = document.getElementById('des-date');
 
-    title.innerHTML = 'Title: ' + info.email;
-    provider.innerHTML = 'Provider: ' + info.consType;
-    typeofservice.innerHTML = 'Type of Service: ' + info.typeOfHome;
-    price.innerHTML = 'Price: ' + info.floors + '/' + info.floors;
-    description.innerHTML = info.yardSize;
+    const accept = document.getElementById('accept');
+    const decline = document.getElementById('decline');
+
+    const date1 = document.getElementById('date');
+    const time = document.getElementById('time');
+
+    title.innerHTML = 'Title: ' + info.TypeOfService;
+    status.innerHTML = 'Status: ' + info.status;
+    provider.innerHTML = 'Provider: ' + info.EmailBuisness;
+    customer.innerHTML = 'Customer: ' + info.EmailHome;
+    price.innerHTML = 'Price: ' + info.price + '/' + info.unit;
+    date.innerHTML = 'Requested Date: ' + info.date + ' At ' + info.time;
+
+    date1.value = info.date;
+    time.value = info.time;
+
+    accept.checked = false;
+    decline.checked = false;
+
+    if(info.status == 'pending'){
+      Buttons.style.display = 'flex';
+
+    }else {
+      Buttons.style.display = 'none';
+    }
+  }
+
+  function switch_box(status)
+  {
+    const accept = document.getElementById('accept');
+    const decline = document.getElementById('decline');
+
+    if(status == 'accept')
+    {
+      decline.checked = false;
+    }
+    else
+    {
+      accept.checked = false;
+    }
   }
 </script>
 </body>

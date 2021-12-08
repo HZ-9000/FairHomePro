@@ -16,15 +16,9 @@ body {
   height: 600px;
 }
 
-.label1 {
+label {
   color: #D1E8E2;
   font-size: 1.8em;
-  display: block;
-}
-
-#info_switch {
-  vertical-align: middle;
-  position: relative;
 }
 
 #BuisnessOwner {
