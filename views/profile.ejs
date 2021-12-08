@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FairHomePro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/notifications.css"/>
+</head>
+<body>
+  <div class="nav">
+    <%- include("partials/hub_Header.ejs") -%>
+  </div>
+
+  <div class="home-container">
+    <div class="contracts-container">
+      <div class="title">
+        <h1>Profile</h1>
+      </div>
+
+      <div class="details">
+        <h1>Name: <%=user.name%></h1>
+        <h1>Email: <%=user.email%></h1>
+        <h1>Phone: <%=user.phone%></h1>
+        <h1>Type of User: <%=user.typeOfUser%></h1>
+        <h1>Address: <%=user.PrimaryAddress%></h1>
+      </div>
+
+      <% if(type == "HomeOwner"){ %>
+        <div class="contracts-container">
+          <div class="title">
+            <h1>Homes</h1>
+          </div>
+          <% if(homes.length > 0){ %>
+            <% homes.forEach(home => { %>
+              <div class="homes-container">
+                <div class="details">
+                  <h1>Type: <%=home.typeOfHome%></h1>
+                  <h1>Cons Type: <%=home.consType%></h1>
+                  <h1>Floors: <%=home.floors%></h1>
+                  <h1>Sqft: <%=home.sqft%></h1>
+                  <h1>Plants: <%=home.plants%></h1>
+                </div>
+              </div>
+          <%})%>
+          <% } else { %>
+            <h1>No current homes</h1>
+          <%}%>
+        </div>
+      <% } else { %>
+        <div class="contracts-container">
+          <div class="title">
+            <h1>Areas</h1>
+          </div>
+          <% if(areas.length > 0){ %>
+            <% areas.forEach(home => { %>
+              <div class="services-container">
+                <div class="details">
+                  <h1><%=home.ServiceArea%></h1>
+                </div>
+              </div>
+          <%})%>
+          <% } else { %>
+            <h1>No current areas</h1>
+          <%}%>
+        </div>
+
+        <div class="contracts-container">
+          <div class="title">
+            <h1>Licenses</h1>
+          </div>
+          <% if(licenses.length > 0){ %>
+            <% licenses.forEach(home => { %>
+              <div class="services-container">
+                <div class="details">
+                  <h1><%=home.License%></h1>
+                </div>
+              </div>
+          <%})%>
+          <% } else { %>
+            <h1>No current licenses</h1>
+          <%}%>
+        </div>
+
+        <div class="contracts-container">
+          <div class="title">
+            <h1>Services</h1>
+          </div>
+          <% if(homes.length > 0){ %>
+            <% homes.forEach(home => { %>
+              <div class="services-container">
+                <div class="details">
+                  <h1>Type: <%=home.TypeOfService%></h1>
+                  <h1>Price: <%=home.pricePerUnit%> / <%=home.unit%></h1>
+                  <h1>Description: <%=home.Description%></h1>
+                </div>
+              </div>
+          <%})%>
+          <% } else { %>
+            <h1>No current homes</h1>
+          <%}%>
+        </div>
+      <%}%>
+    </div>
+  </div>
+
+<script>
+
+</script>
+</body>
+</html>

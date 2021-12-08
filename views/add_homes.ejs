@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FairHomePro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/add_services.css"/>
+</head>
+<body>
+  <div class="home-container">
+    <div class="nav">
+      <%- include("partials/hub_Header.ejs") -%>
+    </div>
+
+    <div class="services-container">
+      <h1>List of Your Homes</h1>
+      <% if(homes.length > 0){ %>
+        <% homes.forEach(home => { %>
+            <div class="details">
+              <h1>Type of Home: <%=home.typeOfHome%></h1>
+              <h1>Sqft: <%=home.sqft%></h1>
+              <h1>Floors: <%=home.floors%></h1>
+            </div>
+      <%})%>
+      <% } else { %>
+        <h1>No current Homes</h1>
+      <%}%>
+    </div>
+
+    <div class="title">
+      <h1>Add Home</h1>
+    </div>
+
+    <div class="form-container">
+      <form action="/add_homes" method="POST" class="add_home-form">
+        <h2>Home Details</h2>
+        <input type="text" id="HomeType" placeholder="Type of Home" name="HomeType"><br>
+        <input type="number" id="Sqft" placeholder="Square Footage" name="Sqft"><br>
+        <input type="number" id="Floors" placeholder="# of Floors" name="Floors"><br>
+        <input type="text" id="ConsType" placeholder="Construction type" name="ConsType"><br>
+        <input type="number" id="YardSize" placeholder="yard size (sq ft)" name="YardSize"><br>
+        <input type="text" id="Plants" placeholder="Plants (Y/N)" name="plants"><br>
+        <input type="text" id="address" placeholder="Home Address" name="HomeAddress"><br>
+
+        <input type="submit" class="submit" value="File">
+      </form>
+  </div>
+  </div>
+</body>
+</html>

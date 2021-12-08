@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FairHomePro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/add_services.css"/>
+</head>
+<body>
+  <div class="home-container">
+    <div class="nav">
+      <%- include("partials/hub_Header.ejs") -%>
+    </div>
+
+    <div class="services-container">
+      <h1>List of Your Service Areas</h1>
+      <% if(areas.length > 0){ %>
+        <% areas.forEach(area => { %>
+            <div class="details">
+              <h1><%=area.ServiceArea%></h1>
+            </div>
+      <%})%>
+      <% } else { %>
+        <h1>No current Areas</h1>
+      <%}%>
+    </div>
+
+    <div class="title">
+      <h1>Add Area</h1>
+    </div>
+
+    <div class="form-container">
+      <form action="/add_areas" method="POST" class="add_area-form">
+        <input type="text" id="HomeType" placeholder="Service Area" name="area"><br>
+        <input type="submit" class="submit" value="File">
+      </form>
+  </div>
+  </div>
+</body>
+</html>

@@ -8,13 +8,30 @@
         </div>
 
         <div class="link-wrapper">
+          <a href="/add_homes">+Home</a>
+        </div>
+
+        <div class="link-wrapper">
           <a href="/complaints">Complaint</a>
         </div>
+
       <% } %>
 
       <% if(type == 'BuisnessOwner'){ %>
         <div class="link-wrapper">
           <a href="/add_services">+Service</a>
+        </div>
+
+        <div class="link-wrapper">
+          <a href="/add_areas">+Area</a>
+        </div>
+
+        <div class="link-wrapper">
+          <a href="/add_licenses">+License</a>
+        </div>
+
+        <div class="link-wrapper">
+          <a href="/add_specialties">+Specialtie</a>
         </div>
       <% } %>
 
@@ -24,8 +41,8 @@
     </div>
 
     <div class = "right-side">
-        <div class="username">
-          <a><%= name %></a>
+        <div class="link-wrapper">
+          <a href="/profile"><%= name %></a>
         </div>
 
         <div class="link-wrapper">

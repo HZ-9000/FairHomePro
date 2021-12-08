@@ -40,9 +40,11 @@
         <h2 id="des-title"></h2>
         <h2 id="des-status"></h2>
         <h2 id="des-provider"></h2>
-        <h2 id="des-customer"></h2>
+        <h2 id="des-customer" href="/profile"></h2>
         <h2 id="des-price"></h2>
         <h2 id="des-date"></h2>
+
+        <% if(type == 'BuisnessOwner'){ %>
         <form action="/notifications" method="POST" class="contract-form">
           <div id="accept-decline">
             <input id="accept" type="checkbox" name="accept" onclick="switch_box('accept')"/>
@@ -51,10 +53,18 @@
             <label for="decline">Decline</label>
           </div>
 
+          <div id="complete-incomplete">
+            <input id="complete" type="checkbox" name="complete" onclick="switch_box('accept')"/>
+            <label for="accept">Complete</label>
+            <input id="incomplete" type="checkbox" name="incomplete" onclick="switch_box('decline')"/>
+            <label for="decline">Incomplete</label>
+          </div>
+
           <input type="text" id="date" name="date">
           <input type="text" id="time" name="time">
           <input type="submit" id="submit" value="Submit">
         </form>
+        <% } %>
       </div>
     </div>
   </div>
@@ -63,6 +73,7 @@
   function placeBid(info)
   {
     const Buttons = document.getElementById('accept-decline');
+    const Buttons2 = document.getElementById('complete-incomplete');
     const title = document.getElementById('des-title');
     const status = document.getElementById('des-status');
     const provider = document.getElementById('des-provider');
@@ -91,9 +102,14 @@
 
     if(info.status == 'pending'){
       Buttons.style.display = 'flex';
+      Buttons2.style.display = 'none';
 
+    }else if(info.status == 'Accepted') {
+      Buttons.style.display = 'none';
+      Buttons2.style.display = 'flex';
     }else {
       Buttons.style.display = 'none';
+      Buttons2.style.display = 'none';
     }
   }
 
@@ -101,14 +117,18 @@
   {
     const accept = document.getElementById('accept');
     const decline = document.getElementById('decline');
+    const complete = document.getElementById('complete');
+    const incomplete = document.getElementById('incomplete');
 
     if(status == 'accept')
     {
       decline.checked = false;
+      incomplete.checked = false;
     }
     else
     {
       accept.checked = false;
+      complete.checked = false;
     }
   }
 </script>
