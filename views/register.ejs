@@ -4,76 +4,106 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FairHomePro</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/register.css"/>
+  <!-- <link rel="stylesheet" href="css/register.css"/> -->
 </head>
 <body>
-  <div class="home-container">
-    <div class="nav">
-      <%- include("partials/header.ejs") -%>
-    </div>
-
-    <div class="form-container">
-      <form action="/register" method="POST" class="register-form">
+  <%- include("partials/header.ejs") -%>
+  <div class="container">
+    <h1 class="display-3">Register</h1> 
+    <form action="/register" method="POST" class="register-form">
+      <div class="mb-3 form-check">
         <input id="info_switch" type="checkbox" name="info_switch" onclick="ShowBusiness()"/>
-        <label for="info_switch">Buisness?</label>
-
-        <div id="HomeOwner">
-          <h2>Register Home Owner</h2>
-          <input type="text" id="name" placeholder="Name" name="name"><br>
-          <input type="email" id="email" placeholder="Email" name="email"><br>
-          <input type="number" id="phone" placeholder="Phone" name="phone"><br>
-          <input type="text" id="address" placeholder="Primary Address" name="PrimaryAddress"><br>
-
-          <h2>Home Details</h2>
-          <input type="text" id="HomeType" placeholder="Type of Home" name="HomeType"><br>
-          <input type="number" id="Sqft" placeholder="Square Footage" name="Sqft"><br>
-          <input type="number" id="Floors" placeholder="# of Floors" name="Floors"><br>
-          <input type="text" id="ConsType" placeholder="Construction type" name="ConsType"><br>
-          <input type="number" id="YardSize" placeholder="yard size (sq ft)" name="YardSize"><br>
-          <input type="text" id="Plants" placeholder="Plants (Y/N)" name="plants"><br>
-          <input type="text" id="address" placeholder="Home Address" name="HomeAddress"><br>
+        <label class="form-check-label" for="info_switch">Buisness?</label>
+      </div>
+      <div class="mb-3" id="HomeOwner">
+        <div>
+          <h1 class="display-6">Register Home Owner</h1> 
+          <label for="name" class="form-label">Name</label>
+          <input type="text" id="name"  name="name" class="form-control">
+          <label for="email" class="form-label">E-Mail</label>
+          <input type="email" id="email" name="email" class="form-control">
+          <label for="address" class="form-label">Phone Number</label>
+          <input type="number" id="phone" name="phone" class="form-control">
+          <label for="address" class="form-label">Address</label>
+          <input type="text" id="address" name="PrimaryAddress" class="form-control">
         </div>
-
-        <div id="BuisnessOwner">
-          <h2>Register Buisness</h2>
-          <input type="text" id="name" placeholder="Buisness Name" name="BuisnessName"><br>
-          <input type="email" id="email" placeholder="Buisness Email" name="BuisnessEmail"><br>
-          <input type="number" id="phone" placeholder="Buisness Phone" name="BuisnessPhone"><br>
-          <input type="text" id="address" placeholder="Buisness Address" name="BuisnessAddress"><br>
-
-          <h2>Add Service Areas</h2>
+        <div>
+          <h1 class="display-6">Home Details</h1>
+          <label for="HomeType" class="form-label">Type of Home</label>
+          <input type="text" id="HomeType" name="HomeType" class="form-control">
+          <label for="Sqft" class="form-label">Square Footage</label>
+          <input type="number" id="Sqft" name="Sqft" class="form-control">
+          <label for="Floors" class="form-label"># of Floors</label>
+          <input type="number" id="Floors" name="Floors" class="form-control">
+          <label for="ConsType" class="form-label">Construction Type</label>
+          <input type="text" id="ConsType" name="ConsType" class="form-control">
+          <label for="YardSize" class="form-label">Yard Size (Sq. Ft.)</label>
+          <input type="number" id="YardSize" name="YardSize" class="form-control">
+          <label for="plants" class="form-label">Plants (Y/N)</label>
+          <input type="text" id="Plants" name="plants" class="form-control">
+          <label for="HomeAddress" class="form-label">Address</label>
+          <input type="text" id="address" name="HomeAddress" class="form-control">
+        </div>
+      </div>
+      <div class="mb-3" id="BuisnessOwner">
+        <div>
+          <h1 class="display-6">Register Buisness</h1>     
+          <label for="BuisnessName" class="form-label">Buisness Name</label>
+          <input type="text" id="name" name="BuisnessName" class="form-control">
+          <label for="BuisnessEmail" class="form-label">Buisness Email</label>
+          <input type="email" id="email" name="BuisnessEmail" class="form-control">
+          <label for="BuisnessPhone" class="form-label">Buisness Phone</label>
+          <input type="number" id="phone" name="BuisnessPhone" class="form-control">
+          <label for="BuisnessAddress" class="form-label">Buisness Address</label>
+          <input type="text" id="address" name="BuisnessAddress" class="form-control">
+        </div>
+        <div>
+          <h1 class="display-6">Add Service Areas</h1> 
           <div id="service_areas">
-            <input type="button" class="add" value="Add" onclick="create_area()">
-          </div>
-
-          <h2>Add Licenses</h2>
-          <div id="add_licenses">
-            <input type="button" class="add" value="Add" onclick="create_license()">
-          </div>
-
-          <h2>Add Specialties</h2>
-          <div id="add_specialties">
-            <input type="button" class="add" value="Add" onclick="create_specialtie()">
+            <input type="button" class="btn btn-secondary" value="Add" onclick="create_area()">
           </div>
         </div>
-
-        <h2>Bank Info</h2>
-        <input type="number" id="CreditCard#" placeholder="CreditCard#" name="CreditCard"><br>
-        <input type="text" id="Exp" placeholder="Exp. MM/YY" name="exp"><br>
-        <input type="number" id="CVV" placeholder="CVV" name="CVV"><br>
-        <input type="number" id="Zipcode" placeholder="Zipcode" name="Zipcode"><br>
-        <input type="number" id="PIN" placeholder="PIN (only for Debit)" name="PIN"><br>
-
-        <h2>Set Password</h2>
-        <input type="text" id="password" placeholder="Password" name="password"><br>
-
-        <input type="submit" class="submit" value="Create">
-      </form>
+        <div>
+          <h1 class="display-6">Add Licenses</h1>
+          <div id="add_licenses">
+            <input type="button" class="btn btn-secondary" value="Add" onclick="create_license()">
+          </div>
+        </div>
+        <div>
+          <h1 class="display-6">Add Specialties</h1>
+          <div id="add_specialties">
+            <input type="button" class="btn btn-secondary" value="Add" onclick="create_specialtie()">
+          </div>
+        </div>
+      </div>
+      <div>
+        <h1 class="display-6">Bank Info</h1>
+        <label for="CreditCard" class="form-label">Credit Card Number</label>
+        <input type="number" id="CreditCard#" placeholder="0000-0000-0000-0000" name="CreditCard" class="form-control">
+        <label for="exp" class="form-label">Expiration date</label>
+        <input type="text" id="Exp" placeholder="MM/YY" name="exp" class="form-control">
+        <label for="CVV" class="form-label">CVV</label>
+        <input type="number" id="CVV" placeholder="000" name="CVV" class="form-control">
+        <label for="Zipcode" class="form-label">Zipcode</label>
+        <input type="number" id="Zipcode" name="Zipcode" class="form-control">
+        <label for="PIN" class="form-label">PIN</label>
+        <input type="number" id="PIN" placeholder="0000 (only for Debit)" name="PIN" class="form-control">
+      </div>
+      <div>
+        <h1 class="display-6">Set Password</h1>
+        <label for="password" class="form-label">Password</label>
+        <input type="text" id="password" placeholder="Password" name="password" class="form-control">
+      </div>
+      <br>
+      <button type="submit" class="submit btn btn-primary">Create</button>
+    </form>
   </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
   <script>
-
   function ShowBusiness() {
     var y = document.getElementById("BuisnessOwner");
     var x = document.getElementById("HomeOwner");
@@ -88,6 +118,8 @@
     }
   }
 
+
+
   //create buttons
   function create_area()
   {
@@ -96,6 +128,7 @@
     element.setAttribute("type", "text");
     element.setAttribute("placeholder", "Service Area");
     element.setAttribute("name", "areas[]");
+    element.setAttribute("class", "form-control");
     document.getElementById("service_areas").appendChild(element);
   }
 
@@ -106,6 +139,7 @@
     element.setAttribute("type", "text");
     element.setAttribute("placeholder", "License");
     element.setAttribute("name", "licenses");
+    element.setAttribute("class", "form-control");
     document.getElementById("add_licenses").appendChild(element);
   }
 
@@ -116,6 +150,7 @@
     element.setAttribute("type", "text");
     element.setAttribute("placeholder", "Speacialtie");
     element.setAttribute("name", "specialties");
+    element.setAttribute("class", "form-control");
     document.getElementById("add_specialties").appendChild(element);
   }
 </script>
