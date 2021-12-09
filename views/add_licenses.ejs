@@ -14,14 +14,14 @@
     <ul class="list-group">
     <% if(licenses.length > 0){ %>
       <% licenses.forEach(license => { %>
-        <li class="list-group-item"><%=license.LicenseName%><button type="button" class="btn-close" aria-label="Close"></button></li>
+        <li class="list-group-item"><%=license.LicenseName%></li>
     <%})%>
     <% } else { %>
       <li class="list-group-item">No current Lisenses</li>
     <%}%>
     </ul>
     <h1 class="display-6">Add License</h1>
-    <form action="/add_licenses" method="POST" class="register-form">
+    <form action="/add_licenses" method="POST" class="add_license-form" class="register-form">
       <input type="text" id="HomeType" name="license" class="form-control">
       <input type="submit" class="btn btn-primary" value="File">
     </form>
@@ -30,3 +30,4 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
+

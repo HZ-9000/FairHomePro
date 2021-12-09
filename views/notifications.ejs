@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,21 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FairHomePro</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-  <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/notifications.css"/> -->
 </head>
 <body>
-    <%- include("partials/hub_Header.ejs") -%>
-<div class="container">
-  <h1 class="display-5">List of Notifications</h1>
-  <div class="row">
+  <%- include("partials/hub_Header.ejs") -%>
+  <div class="container">
+    <h1 class="display-4">List of Notifications.</h1>
     <% if(contracts.length > 0){ %>
       <% contracts.forEach(contract => { %>
         <div class="col-sm-3">
-          <div class="card">
-            <div class="card-body">
-              <p class="card-text">Service: <%=contract.TypeOfService%></p>
+          <div class="card" >
+            <div class="card-body" onclick="placeBid(<%= JSON.stringify(contract)%>);">
+              <h5 class="card-title"><%=contract.TypeOfService%></h5>
               <p class="card-text">Status: <%=contract.status%></p>
             </div>
           </div>
@@ -31,52 +25,45 @@
       <div class="col-sm-3">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">No current contracts</h5>
+            <h5 class="card-title">No current Contracts</h5>
           </div>
         </div>
       </div>
     <%}%>
-  </ul>
-</div>
-
-    <div class="contract-details-container">
-      <div class="title">
-        <h1 class="display-5">Info</h1>
-      </div>
-
-      <div class="description">
-        <h2 id="des-title"></h2>
-        <h2 id="des-status"></h2>
-        <h2 id="des-provider"></h2>
-        <h2 id="des-customer" href="/profile"></h2>
-        <h2 id="des-price"></h2>
-        <h2 id="des-date"></h2>
-
-        <% if(type == 'BuisnessOwner'){ %>
-        <form action="/notifications" method="POST" class="contract-form">
-          <div id="accept-decline">
-            <input id="accept" type="checkbox" name="accept" onclick="switch_box('accept')"/>
-            <label for="accept">Accept</label>
-            <input id="decline" type="checkbox" name="decline" onclick="switch_box('decline')"/>
-            <label for="decline">Decline</label>
-          </div>
-
-          <div id="complete-incomplete">
-            <input type="text" id="total_units" name="total_units" placeholder="Total Units">
-            <input type="text" id="bill" name="bill" placeholder="Total Cost">
-            <input id="complete" type="checkbox" name="complete" onclick="switch_box('accept')"/>
-            <label for="accept">Complete</label>
-            <input id="incomplete" type="checkbox" name="incomplete" onclick="switch_box('decline')"/>
-            <label for="decline">Incomplete</label>
-          </div>
-
-          <input type="text" id="date" name="date">
-          <input type="text" id="time" name="time">
-          <input type="submit" id="submit" value="Submit">
-        </form>
-        <% } %>
+    <h1 class="display-4">Info</h1>
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title"id="des-title"></h6>
+          <h6 class="card-text"id="des-status"></h6>
+          <h6 class="card-text"id="des-provider"></h6>
+          <h6 class="card-text"id="des-customer" href="/profile"></h6>
+          <h6 class="card-text"id="des-price"></h6>
+          <h6 class="card-text"id="des-date"></h6>
+        </div>
       </div>
     </div>
+    <br/>
+    <% if(type == 'BuisnessOwner'){ %>
+      <form action="/notifications" method="POST" class="contract-form">
+          <input id="accept" type="checkbox" name="accept" onclick="switch_box('accept')"/>
+          <label for="accept">Accept</label>
+          <input id="decline" type="checkbox" name="decline" onclick="switch_box('decline')"/>
+          <label for="decline">Decline</label>
+        <div id="complete-incomplete">
+          <input type="text" id="total_units" name="total_units" placeholder="Total Units" class="form-control">
+          <input type="text" id="bill" name="bill" placeholder="Total Cost" class="form-control">
+          <input id="complete" type="checkbox" name="complete" onclick="switch_box('accept')"/>
+          <label for="accept">Complete</label>
+          <input id="incomplete" type="checkbox" name="incomplete" onclick="switch_box('decline')"/>
+          <label for="decline">Incomplete</label>
+        </div>
+        <input type="text" id="date" name="date" class="form-control" >
+        <input type="text" id="time" name="time" class="form-control" >
+        <input type="submit" id="submit" value="Submit" class="btn btn-primary">
+      </form>
+      <% } %>
+
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -92,30 +79,23 @@
     const customer = document.getElementById('des-customer');
     const price = document.getElementById('des-price');
     const date = document.getElementById('des-date');
-
     const accept = document.getElementById('accept');
     const decline = document.getElementById('decline');
-
     const date1 = document.getElementById('date');
     const time = document.getElementById('time');
-
     title.innerHTML = 'Title: ' + info.TypeOfService;
     status.innerHTML = 'Status: ' + info.status;
     provider.innerHTML = 'Provider: ' + info.EmailBuisness;
     customer.innerHTML = 'Customer: ' + info.EmailHome;
     price.innerHTML = 'Price: ' + info.price + '/' + info.unit;
     date.innerHTML = 'Requested Date: ' + info.date + ' At ' + info.time;
-
     date1.value = info.date;
     time.value = info.time;
-
     accept.checked = false;
     decline.checked = false;
-
     if(info.status == 'pending'){
       Buttons.style.display = 'flex';
       Buttons2.style.display = 'none';
-
     }else if(info.status == 'Accepted') {
       Buttons.style.display = 'none';
       Buttons2.style.display = 'flex';
@@ -124,14 +104,12 @@
       Buttons2.style.display = 'none';
     }
   }
-
   function switch_box(status)
   {
     const accept = document.getElementById('accept');
     const decline = document.getElementById('decline');
     const complete = document.getElementById('complete');
     const incomplete = document.getElementById('incomplete');
-
     if(status == 'accept')
     {
       decline.checked = false;

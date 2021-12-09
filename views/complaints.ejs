@@ -12,16 +12,15 @@
       <h1 style="font-weight: bold;" class="display-4">File a complaint</h1>
 
     <form action="/complaints" method="POST" class="complaint-form">
-      <h1 class="display-6">Complaint recipiant</h1>
       <input type="text" id="Recipiant_Name" placeholder="Recipiant Name (full)" name="Recipiant_Name" class="form-control" required><br>
-      <select id="company" name="BuisnessName"  class="form-control">
+      <select id="company" name="BuisnessName" class="form-select">
         <% companies.forEach(company => { %>
             <option value="<%=company%>"><%=company%></option>
         <%})%>
-      </select>
+      </select><br/>
       <input type="text" id="BuisnessName" placeholder="Buisness Name (if applicable)" name="BuisnessName" class="form-control" required><br>
       <textarea id="complaint" placeholder="Complaint" name="Complaint_des" rows="15" cols="50" class="form-control" required></textarea>
-      <input type="submit" class="submit" value="File">
+      <input type="submit" class="btn btn-primary" value="File">
     </form>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
