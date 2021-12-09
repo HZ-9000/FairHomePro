@@ -334,7 +334,13 @@ app.get('/profile', checkAuthenticated, (req, res) => {
 //------------complaints--------------
 
 app.get('/complaints', checkAuthenticated, (req, res) => {
-  res.render("complaints",{name: req.user.name, type: req.user.typeOfUser,})
+  Contract.distinct("EmailBuisness", {EmailHome: req.user.email})
+  .then((result) => {
+    res.render("complaints",{name: req.user.name, type: req.user.typeOfUser, companies: result})
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 })
 
 app.post('/complaints', checkAuthenticated, (req, res) => {

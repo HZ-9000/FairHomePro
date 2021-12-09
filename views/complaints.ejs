@@ -20,7 +20,16 @@
       <form action="/complaints" method="POST" class="complaint-form">
         <h2>Complaint recipiant</h2>
         <input type="text" id="Recipiant_Name" placeholder="Recipiant Name (full)" name="Recipiant_Name"><br>
-        <input type="text" id="BuisnessName" placeholder="Buisness Name (if applicable)" name="BuisnessName"><br>
+        <label for="company">Choose Provider:</label>
+          <select id="company" name="BuisnessName">
+            <% if(companies.length > 0){ %>
+              <% companies.forEach(company => { %>
+                <option value="<%=company%>"><%=company%></option>
+            <%})%>
+            <% } else { %>
+              <h1>No current Areas</h1>
+            <%}%>
+          </select>
         <textarea id="complaint" placeholder="Complaint" name="Complaint_des" rows="15" cols="50"></textarea>
         <input type="submit" class="submit" value="File">
       </form>
