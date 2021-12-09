@@ -249,9 +249,9 @@ app.get('/services', checkAuthenticated, (req, res) => {
 })
 
 app.post('/services', checkAuthenticated, (req, res) => {
-  Contract.find({date: req.body.date, time: req.body.time})
+  Contract.find({EmailBuisness: req.body.provider, date: req.body.date, time: req.body.time})
     .then((result) => {
-      if(result != null){
+      if(result[0] != null){
         alert("Date Taken")
         res.redirect('/services');
       }else{
@@ -263,7 +263,9 @@ app.post('/services', checkAuthenticated, (req, res) => {
           price: req.body.price,
           unit: req.body.unit,
           date: req.body.date,
-          time: req.body.time
+          time: req.body.time,
+          TotalUnits: null,
+          total: null
         })
 
         contract.save();
@@ -329,22 +331,6 @@ app.get('/profile', checkAuthenticated, (req, res) => {
   }
 })
 
-//----------settings------------------
-
-app.get('/settings', checkAuthenticated, (req, res) => {
-  if(req.user.typeOfUser == 'HomeOwner'){
-    Home.find({email : req.user.email})
-    .then((result) => {
-      res.render("settings",{name: req.user.name, type: req.user.typeOfUser, homes: result})
-    })
-  }else{
-    Service.find({email : req.user.email})
-    .then((result) => {
-      res.render("settings",{name: req.user.name, type: req.user.typeOfUser, homes: result})
-    })
-  }
-})
-
 //------------complaints--------------
 
 app.get('/complaints', checkAuthenticated, (req, res) => {
@@ -402,7 +388,7 @@ app.post('/notifications', checkAuthenticated, (req, res) => {
       }
     })
   } else if(req.body.complete == 'on'){
-    Contract.findOneAndUpdate({ EmailBuisness: req.user.email, date: req.body.date , time: req.body.time },{ status: "Completed" }, (error, data) => {
+    Contract.findOneAndUpdate({ EmailBuisness: req.user.email, date: req.body.date , time: req.body.time },{ status: "Completed", TotalUnits: req.body.total_units, total: req.body.bill }, (error, data) => {
       if(error){
         console.log(error)
       }else{
@@ -411,7 +397,7 @@ app.post('/notifications', checkAuthenticated, (req, res) => {
     })
 
   } else if(req.body.incomplete == 'on'){
-    Contract.findOneAndUpdate({ EmailBuisness: req.user.email, date: req.body.date , time: req.body.time },{ status: "Incomplete" }, (error, data) => {
+    Contract.findOneAndUpdate({ EmailBuisness: req.user.email, date: req.body.date , time: req.body.time },{ status: "Incomplete", TotalUnits: req.body.total_units, total: req.body.bill }, (error, data) => {
       if(error){
         console.log(error)
       }else{
