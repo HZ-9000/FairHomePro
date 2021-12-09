@@ -4,47 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FairHomePro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="css/services.css"/>
 </head>
 <body>
-  <div class="nav">
-    <%- include("partials/hub_Header.ejs") -%>
-  </div>
-
-  <div class="home-container">
-    <div class="services-container">
-      <div class="title">
-        <h1>List of Services</h1>
-      </div>
-      <% if(services.length > 0){ %>
-        <% services.forEach(service => { %>
-          <div class="service-container" onclick="update(<%= JSON.stringify(service)%>)">
-            <div class="details">
-              <h1>Service Name: <%=service.TypeOfService%></h1>
-              <h1>Price: <%=service.pricePerUnit%> / <%=service.unit%> </h1>
-              <h1>Provider: <%=service.email%> </h1>
+  <%- include("partials/hub_Header.ejs") -%>
+  <div class="container">
+    <h1 class="display-4">List of services.</h1>
+    <div class="row">
+    <% if(services.length > 0){ %>
+      <% services.forEach(service => { %>
+        <div class="col-sm-3">
+          <div class="card" >
+            <div class="card-body" onclick="update(<%= JSON.stringify(service)%>)">
+              <h5 class="card-title"><%=service.TypeOfService%></h5>
+              <p class="card-text">Price: <%=service.pricePerUnit%> / <%=service.unit%></p>
+              <p class="card-text">Areas: <%=service.unit%> </p>
+              <p class="card-text">Provider: <%=service.email%> </p>
             </div>
           </div>
-      <%})%>
-      <% } else { %>
-        <h1>No current services</h1>
-      <%}%>
+        </div>
+    <%})%>
+    <% } else { %>
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">No current services</h5>
+          </div>
+        </div>
+      </div>
+    <%}%>
     </div>
-
-    <div class="service-details-container">
-      <div class="title">
-        <h1>Service info</h1>
+    <div>
+      <h1 class="display-4">Service Info</h1>
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title"id="des-title"></h6>
+            <h6 class="card-title"id="des-provider"></h6>
+            <h6 class="card-title"id="des-typeofservice"></h6>
+            <h6 class="card-title"id="des-price"></h6>
+            <h6 class="card-title"id="des-description"></h6>
+          </div>
+        </div>
       </div>
-
-      <div class="description">
-        <h2 id="des-title"></h2>
-        <h2 id="des-provider"></h2>
-        <h2 id="des-typeofservice"></h2>
-        <h2 id="des-price"></h2>
-        <p id="des-description"></p>
-      </div>
-
+    </div>
       <div id="bid-form-container">
         <form action="/services" method="POST" class="bid-form">
           <h2>Place Bid</h2>
@@ -54,9 +58,9 @@
             <input type="text" id="price" placeholder="Price" name="price"><br>
             <input type="text" id="unit" placeholder="Unit" name="unit"><br>
           </div>
-            <input type="text" id="date" placeholder="Date (EX: 11/2/21)" name="date"><br>
-            <input type="text" id="time" placeholder="Time (EX: 1:33PM)" name="time"><br>
-            <input type="submit" class="submit" value="Create Bid">
+            <input type="text" id="date" placeholder="Date (EX: 11/2/21)" name="date" class="form-control col-sm-3">
+            <input type="text" id="time" placeholder="Time (EX: 1:33PM)" name="time" class="form-control col-sm-3">
+            <input type="submit" class="btn btn-primary" value="Create Bid">
         </form>
       </div>
     </div>
