@@ -33,6 +33,12 @@ const contractSchema = new Schema({
   time: {
     type: String,
     required: true
+  },
+  TotalUnits: {
+    type: String,
+  },
+  total: {
+    type: String,
   }
 }, { timestamps: true });
 
