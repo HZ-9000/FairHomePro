@@ -9,8 +9,8 @@
 <body>
   <%- include("partials/hub_Header.ejs") -%>
   <div class="container">
-    <h1 class="display-5">Service Areas -</h1>
-    <h1 class="display-6">List of service areas.</h1>
+    <h1 class="display-5">Specialities -</h1>
+    <h1 class="display-6">List of Specialities</h1>
     <ul class="list-group">
     <% if(specialties.length > 0){ %>
       <% specialties.forEach(specialtie => { %>
@@ -20,7 +20,7 @@
       <li class="list-group-item">No current Specialities</li>
     <%}%>
     </ul>
-    <h1 class="display-6">Add License</h1>
+    <h1 class="display-6">Add Speciality</h1>
     <form action="/add_specialties" method="POST" class="add_specialtie-form" class="register-form">
       <input type="text" id="HomeType" name="specialtie" class="form-control">
       <input type="submit" class="btn btn-primary" value="File">
