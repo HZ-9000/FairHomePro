@@ -91,7 +91,7 @@ app.post('/register', async(req, res) => {
     if(req.body.info_switch ? true : false) {
       await User.find({ email: req.body.BuisnessEmail})
       .then((result) => {
-        if(result != null){
+        if(result[0] != null){
           console.log("user exsists");
         }else{
           //BuisnessOwner
@@ -167,7 +167,7 @@ app.post('/register', async(req, res) => {
     } else {
       User.find({ email: req.body.email})
       .then((result) => {
-        if(result != null){
+        if(result[0] != null){
           console.log("user exsists");
         }else{
           //Home Owner

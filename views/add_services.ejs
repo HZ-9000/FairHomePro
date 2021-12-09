@@ -18,7 +18,7 @@
             <div class="card-body">
               <h5 class="card-title"><%=service.TypeOfService%></h5>
               <p class="card-text">Price: <%=service.pricePerUnit%> / <%=service.unit%></p>
-              <p class="card-text">Areas: <%=service.unit%></p>
+              <p class="card-text">Description: <%=service.Description%></p>
               <button type="button" class="btn-close" aria-label="Close"></button>
             </div>
           </div>
@@ -39,7 +39,7 @@
       <h1 class="display-6">Service Details</h1>
       <input type="text" id="service_name" placeholder="Service Name" name="service_name" class="form-control" required>
       <input type="text" id="price" placeholder="Price" name="price" class="form-control" required>
-      <input type="text" id="unit" placeholder="Unit (EX: 1.25/hr)" name="unit" class="form-control" required> 
+      <input type="text" id="unit" placeholder="Unit (EX: 1.25/hr)" name="unit" class="form-control" required>
 
       <h1 class="display-6">Service Description</h1>
       <div class="form-floating">
